@@ -36,7 +36,7 @@ const Navbar = () => {
             >
               {link}
               <span 
-                className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-cyan-400 to-cyan-300 transition-all duration-300 group-hover:w-full"
+                className="absolute bottom-0 left-0 w-0 h-0.5 bg-linear-to-r from-cyan-400 to-cyan-300 transition-all duration-300 group-hover:w-full"
                 style={{
                   boxShadow: '0 0 10px hsl(175 80% 50% / 0.6)'
                 }}
