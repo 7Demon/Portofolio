@@ -237,16 +237,39 @@ const Home = () => {
     </section>
 
     {/* project section */}
-    <section id="projects" className='relative min-h-screen flex overflow-hidden'>
-        <div className='container mx-40 px-4 md:mx-6 py-20 md:py-32 relative z-10'>
-            <div className=''>
+    <section id="projects" className='relative py-10 md:py-10 overflow-hidden'>
+        <div className='container mx-auto px-4 md:px-6'>
+            <div className='content-center mx-auto'>
                     {/* title */}
                     <div className='text-center mb-12 md:mb-16 animate-fade-up opacity-0'>
                         <h2 className="text-3xl font-bold text-linear neon-glow">PROJECTS</h2>
                     </div>
                     {/* content */}
-                    <div>
-                      
+                    <div className='grid lg:grid-cols-2 gap-5 grid-cols-1 animate-fade-up opacity-0 delay-200 mx-auto px-20'>
+                      <div className='flex flex-col justify-center items-center gap-5'>
+                        <div className='flex md:w-xl h-80 border rounded-xl items-center justify-center'>card</div>
+                        <div>
+                              <h3 className='text-lg font-bold text-foreground mb-2'>Project 1</h3>
+                        </div>
+                      </div>
+                      <div className='flex flex-col justify-center items-center gap-5'>
+                        <div className='flex md:w-xl h-80 border rounded-xl items-center justify-center'>card</div>
+                        <div>
+                              <h3 className='text-lg font-bold text-foreground mb-2'>Project 2</h3>
+                        </div>
+                      </div>
+                      <div className='flex flex-col justify-center items-center gap-5'>
+                        <div className='flex md:w-xl h-80 border rounded-xl items-center justify-center'>card</div>
+                        <div>
+                              <h3 className='text-lg font-bold text-foreground mb-2'>Project 2</h3>
+                        </div>
+                      </div>
+                      <div className='flex flex-col justify-center items-center gap-5'>
+                        <div className='flex md:w-xl h-80 border rounded-xl items-center justify-center'>card</div>
+                        <div>
+                              <h3 className='text-lg font-bold text-foreground mb-2'>Project 2</h3>
+                        </div>
+                      </div>
                     </div>
             </div>
         </div>
