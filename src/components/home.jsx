@@ -60,20 +60,20 @@ const Home = () => {
                 <span className="text-sm text-muted-foreground">Available for Web2 and Web3 Projects</span>
               </div>
             </div>
-
+            {/* Engineering the Future of Web2 & Web3 */}
             {/* Main heading */}
             <h1 className="font-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold mb-6 animate-fade-up opacity-0 delay-200">
-              <span className="text-foreground">Building the</span>
+              <span className="text-foreground">Engineering the</span>
               <br />
-              <span className="text-gradient neon-glow">Decentralized</span>
-              <br />
-              <span className="text-foreground">Future</span>
+              <span className="text-gradient neon-glow">Future of Web2 & Web3</span>
+              {/* <br />
+              <span className="text-foreground">Future</span> */}
             </h1>
 
             {/* Subtitle */}
             <p className="text-base sm:text-lg md:text-xl text-muted-foreground max-w-2xl mb-8 md:mb-10 animate-fade-up opacity-0 delay-300">
-              Full-stack blockchain developer specializing in smart contracts, <br />
-              DeFi protocols, and immersive Web3 experiences.
+              Full-stack developer building Web2 and Web3 applications,<br />
+               including smart contract integration and decentralized features.
             </p>
 
             {/* CTA Buttons */}
@@ -81,7 +81,7 @@ const Home = () => {
               <div className="relative group">
                 <div className="absolute -inset-1 bg-linear-to-r from-primary via-secondary to-primary rounded-lg blur opacity-75 group-hover:opacity-100 group-hover:blur-md transition duration-500 animate-pulse" />
                 <Button variant="neon" size="lg" className="relative hover:scale-105 transition-transform duration-300 shadow-lg">
-                  <span className="relative">View Projects</span>
+                  <a href="#projects"></a><span className="relative">View Projects</span>
                 </Button>
               </div>
             </div>
@@ -96,7 +96,7 @@ const Home = () => {
                 <a
                   key={index}
                   href={href}
-                  className="w-12 h-12 glass-card-hover flex items-center justify-center text-muted-foreground hover:text-primary transition-all hover:scale-110"
+                  className="border rounded-xl w-12 h-12 glass-card-hover flex items-center justify-center text-muted-foreground hover:text-primary transition-all hover:scale-110"
                 >
                   <Icon size={20} />
                 </a>
@@ -170,15 +170,15 @@ const Home = () => {
             {/* Left - Text Content */}
             <div className="space-y-6 animate-fade-up opacity-0 delay-200">
               <p className="text-muted-foreground text-justify md:text-lg leading-relaxed">
-                I'm a passionate full-stack blockchain developer with 5+ years of experience building decentralized applications and smart contracts. My journey started with curiosity about cryptocurrency, and it evolved into a deep expertise in Web3 technologies.
+                I'm a full-stack developer working across Web2 and Web3 environments, with experience building web applications and integrating blockchain technologies. My interest in software development gradually expanded into exploring decentralized systems and smart contracts.
               </p>
               
               <p className="text-muted-foreground text-justify md:text-lg leading-relaxed">
-                I specialize in creating secure, efficient, and user-friendly blockchain solutions. Whether it's developing smart contracts, building DeFi protocols, or creating immersive Web3 experiences, I'm dedicated to pushing the boundaries of what's possible in the decentralized space.
+                I focus on developing efficient, maintainable, and user-friendly applications. My work includes building modern web platforms, implementing backend systems, and integrating blockchain features where needed.
               </p>
 
               <p className="text-muted-foreground text-justify md:text-lg leading-relaxed">
-                When I'm not coding, you can find me exploring new blockchain innovations, contributing to open-source projects, or sharing knowledge with the Web3 community.
+                Outside of development, I enjoy exploring emerging technologies, and continuously improving my technical skills.
               </p>
             </div>
 
@@ -194,17 +194,25 @@ const Home = () => {
                 </div>
 
                 {/* Scrollable container */}
-                <div className="h-96 overflow-y-auto snap-y snap-mandatory scrollbar-slot scroll-smooth relative">
+                <div className="h-96 overflow-y-auto snap-y snap-mandatory pt-32 pb-32 scrollbar-slot scroll-smooth relative">
                   <div className="flex flex-col">
                     {[
-                      { title: 'Smart Contracts', skills: 'Solidity, Hardhat, Foundry' },
-                      { title: 'Backend', skills: 'Node.js, Python, Rust' },
-                      { title: 'Frontend', skills: 'React, Next.js, Web3.js' },
-                      { title: 'DeFi', skills: 'Uniswap, Aave, Curve' },
-                      { title: 'Testing', skills: 'Jest, Mocha, Chai' },
-                      { title: 'Tools', skills: 'Git, Docker, AWS' },
-                      { title: 'Blockchain', skills: 'Ethereum, Polygon, Arbitrum' },
-                    ].map((skill, index) => (
+                      { 
+                        title: 'Backend', 
+                        skills: 'Node.js, Python, PHP (Laravel)' 
+                      },
+                      { 
+                        title: 'Frontend', 
+                        skills: 'React, Tailwind CSS, Bootstrap' 
+                      },
+                      { 
+                        title: 'Blockchain', 
+                        skills: 'Solidity, Hardhat, Ethers.js' 
+                      },
+                      { 
+                        title: 'Tools', 
+                        skills: 'Git, WordPress, SAP' 
+                      }].map((skill, index) => (
                       <div 
                         key={index}
                         className="snap-center shrink-0 h-32 px-9 py-3 flex items-center justify-center transition-all duration-500 ease-out transform"
