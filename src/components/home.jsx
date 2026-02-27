@@ -2,6 +2,16 @@ import { Button } from './ui/button';
 import { ArrowDown, Github, Twitter, Linkedin } from 'lucide-react';
 import { useEffect } from 'react';
 
+const projects = [
+  {
+    title: 'Project 1',
+    image: '../assets/project1.png',
+    description: 'A web application built with React and Node.js.'},
+    {
+      title: 'Project 2',
+      image: '../assets/project2.png',
+      description: 'A mobile application built with React Native and Firebase.'}
+];
 const Home = () => {
   useEffect(() => {
     const scrollContainer = document.querySelector('.scrollbar-slot');
@@ -48,7 +58,7 @@ const Home = () => {
       <>
     {/* hero section*/}
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
-      <div className="container mx-40 px-4 md:px-6 py-20 md:py-32 relative z-10">
+      <div className="container mx-40 px-4 md:px-6 py-30 md:py-30 relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
           
           {/* Left Content */}
@@ -62,7 +72,7 @@ const Home = () => {
             </div>
             {/* Engineering the Future of Web2 & Web3 */}
             {/* Main heading */}
-            <h1 className="font-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold mb-6 animate-fade-up opacity-0 delay-200">
+            <h1 className="font-display text-2xl sm:text-5xl md:text-5xl lg:text-6xl font-bold mb-6 animate-fade-up opacity-0 delay-200">
               <span className="text-foreground">Engineering the</span>
               <br />
               <span className="text-gradient neon-glow">Future of Web2 & Web3</span>
@@ -71,7 +81,7 @@ const Home = () => {
             </h1>
 
             {/* Subtitle */}
-            <p className="text-base sm:text-lg md:text-xl text-muted-foreground max-w-2xl mb-8 md:mb-10 animate-fade-up opacity-0 delay-300">
+            <p className="text-base sm:text-lg md:text-lg text-muted-foreground max-w-2xl mb-8 md:mb-10 animate-fade-up opacity-0 delay-300">
               Full-stack developer building Web2 and Web3 applications,<br />
                including smart contract integration and decentralized features.
             </p>
@@ -81,7 +91,7 @@ const Home = () => {
               <div className="relative group">
                 <div className="absolute -inset-1 bg-linear-to-r from-primary via-secondary to-primary rounded-lg blur opacity-75 group-hover:opacity-100 group-hover:blur-md transition duration-500 animate-pulse" />
                 <Button variant="neon" size="lg" className="relative hover:scale-105 transition-transform duration-300 shadow-lg">
-                  <a href="#projects"></a><span className="relative">View Projects</span>
+                  <a href="#projects"><span className="relative">View Projects</span></a>
                 </Button>
               </div>
             </div>
@@ -245,7 +255,7 @@ const Home = () => {
     </section>
 
     {/* project section */}
-    <section id="projects" className='relative py-10 md:py-10 overflow-hidden'>
+    <section id="projects" className='relative py-30 md:py-30 overflow-hidden '>
         <div className='container mx-auto px-4 md:px-6'>
             <div className='content-center mx-auto'>
                     {/* title */}
@@ -254,30 +264,15 @@ const Home = () => {
                     </div>
                     {/* content */}
                     <div className='grid lg:grid-cols-2 gap-5 grid-cols-1 animate-fade-up opacity-0 delay-200 mx-auto px-20'>
-                      <div className='flex flex-col justify-center items-center gap-5'>
-                        <div className='flex md:w-xl h-80 border rounded-xl items-center justify-center'>card</div>
-                        <div>
-                              <h3 className='text-lg font-bold text-foreground mb-2'>Project 1</h3>
+                      {projects.map((projects) => 
+                      (<div className='flex flex-col justify-center items-center gap-5'>
+                        <div className='flex md:w-xl h-80 border rounded-xl items-center justify-center'>
+                          <img src={projects.image} alt={projects.title} />
                         </div>
-                      </div>
-                      <div className='flex flex-col justify-center items-center gap-5'>
-                        <div className='flex md:w-xl h-80 border rounded-xl items-center justify-center'>card</div>
                         <div>
-                              <h3 className='text-lg font-bold text-foreground mb-2'>Project 2</h3>
+                              <h3 className='text-lg font-bold text-foreground mb-2'>{projects.description}</h3>
                         </div>
-                      </div>
-                      <div className='flex flex-col justify-center items-center gap-5'>
-                        <div className='flex md:w-xl h-80 border rounded-xl items-center justify-center'>card</div>
-                        <div>
-                              <h3 className='text-lg font-bold text-foreground mb-2'>Project 2</h3>
-                        </div>
-                      </div>
-                      <div className='flex flex-col justify-center items-center gap-5'>
-                        <div className='flex md:w-xl h-80 border rounded-xl items-center justify-center'>card</div>
-                        <div>
-                              <h3 className='text-lg font-bold text-foreground mb-2'>Project 2</h3>
-                        </div>
-                      </div>
+                      </div>))}
                     </div>
             </div>
         </div>
