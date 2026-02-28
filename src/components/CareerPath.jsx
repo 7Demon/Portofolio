@@ -143,11 +143,11 @@ const CareerItem = ({ item, index }) => {
 
 const CareerPath = () => {
   return (
-    <section id="career" className="relative py-24 md:py-32 overflow-hidden">
+    <section id="career" data-reveal style={{ '--reveal-delay': '80ms' }} className="relative py-24 md:py-32 overflow-hidden">
       <div className="container mx-auto px-6">
         <div className="max-w-5xl mx-auto">
           {/* Section header */}
-          <div className="text-center mb-20">
+          <div data-reveal style={{ '--reveal-delay': '120ms' }} className="text-center mb-20">
             <h2 className="font-display text-4xl md:text-5xl font-bold mb-4">
               <span className="text-gradient">Career Path</span>
             </h2>

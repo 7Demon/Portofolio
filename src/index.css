@@ -162,6 +162,35 @@
   .animate-pulse-slow {
     animation: pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite;
   }
+
+  .reveal {
+    opacity: 0;
+    transform: translate3d(0, 24px, 0) scale(0.98);
+    filter: blur(8px);
+    transition-property: opacity, transform, filter;
+    transition-duration: 700ms;
+    transition-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+    transition-delay: var(--reveal-delay, 0ms);
+    will-change: opacity, transform, filter;
+  }
+
+  .reveal-up {
+    transform: translate3d(0, 28px, 0) scale(0.98);
+  }
+
+  .reveal-left {
+    transform: translate3d(-28px, 0, 0) scale(0.98);
+  }
+
+  .reveal-right {
+    transform: translate3d(28px, 0, 0) scale(0.98);
+  }
+
+  .reveal-visible {
+    opacity: 1;
+    transform: translate3d(0, 0, 0) scale(1);
+    filter: blur(0);
+  }
 }
 
 @keyframes gradient-shift {
@@ -303,4 +332,16 @@
 .center-item .skill-card {
   border-color: hsl(175 80% 50% / 0.8) !important;
   background: linear-gradient(135deg, hsl(175 80% 50% / 0.1), hsl(260 60% 55% / 0.1)) !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal,
+  .reveal-up,
+  .reveal-left,
+  .reveal-right {
+    opacity: 1 !important;
+    transform: none !important;
+    filter: none !important;
+    transition: none !important;
+  }
 }

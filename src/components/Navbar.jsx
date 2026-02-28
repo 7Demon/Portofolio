@@ -48,9 +48,11 @@ const Navbar = () => {
 
   return (
     <nav
+      data-reveal
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
         scrolled || mobileMenuOpen ? 'glass-card py-4' : 'py-6 bg-transparent'
       }`}
+      style={{ '--reveal-delay': '40ms' }}
     >
       <div className="container mx-auto px-10 sm:px-30 lg:px-40">
         <div className="flex items-center justify-between">

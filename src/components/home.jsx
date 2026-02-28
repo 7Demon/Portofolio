@@ -69,7 +69,7 @@ const Home = () => {
     return (
       <>
     {/* hero section*/}
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
+    <section data-reveal style={{ '--reveal-delay': '80ms' }} className="relative min-h-screen flex items-center justify-center overflow-hidden">
       <div className="container mx-auto px-4 sm:px-30 lg:px-40 py-24 md:py-28 lg:py-30 relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-12 items-center">
           
@@ -174,7 +174,7 @@ const Home = () => {
     </section>
 
     {/* About Section */}
-    <section id="about" className="relative py-20 md:py-32 overflow-hidden">
+    <section id="about" data-reveal style={{ '--reveal-delay': '100ms' }} className="relative py-20 md:py-32 overflow-hidden">
       <div className="container mx-auto px-4 md:px-6">
         <div className="max-w-6xl mx-auto">
           {/* Section Title */}
@@ -195,7 +195,7 @@ const Home = () => {
               </p>
               
               <p className="text-muted-foreground text-justify md:text-justify md:text-lg leading-relaxed">
-                I’m a full-stack developer working across Web2 and Web3 environments, with experience building web applications and integrating blockchain technologies. My interest in software development gradually expanded into exploring decentralized systems and smart contracts.
+                I’m a developer working across Web2 and Web3 environments, with experience building web applications and integrating blockchain technologies. My interest in software development gradually expanded into exploring decentralized systems and smart contracts.
               </p>
 
               <p className="text-muted-foreground text-justify md:text-justify md:text-lg leading-relaxed">
@@ -275,12 +275,12 @@ const Home = () => {
     </section>
     
     {/* career path */}
-    <section id='careerpath'>
+    <section id='careerpath' data-reveal style={{ '--reveal-delay': '120ms' }}>
       <CareerPath />
     </section>
 
     {/* project section */}
-    <section id="projects" className='relative py-20 md:py-28 overflow-hidden '>
+    <section id="projects" data-reveal style={{ '--reveal-delay': '140ms' }} className='relative py-20 md:py-28 overflow-hidden '>
         <div className='container mx-auto px-4 md:px-6'>
             <div className='content-center mx-auto'>
                     {/* title */}
@@ -289,8 +289,8 @@ const Home = () => {
                     </div>
                     {/* content */}
                     <div className='grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8 animate-fade-up opacity-0 delay-200 mx-auto max-w-6xl px-0 sm:px-4'>
-                      {projects.map((project) => 
-                      (<div key={project.title} className='flex flex-col justify-center items-center gap-4 sm:gap-5'> <a href={project.link} target="_blank" rel="noopener noreferrer" className='block w-full max-w-lg'>
+                      {projects.map((project, index) => 
+                      (<div key={project.title} data-reveal style={{ '--reveal-delay': `${index * 90}ms` }} className='flex flex-col justify-center items-center gap-4 sm:gap-5'> <a href={project.link} target="_blank" rel="noopener noreferrer" className='block w-full max-w-lg'>
                         <div className='group relative w-full aspect-video rounded-xl border border-white/20 overflow-hidden hover:scale-[1.02] sm:hover:scale-105 transition-transform duration-300 shadow-lg bg-black/30'>
                           <img src={project.image} alt={project.title} className='w-full h-full object-cover block'/>
                           <div className='absolute inset-0 bg-black/65 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end'>
@@ -309,7 +309,7 @@ const Home = () => {
     </section>
 
     {/* contact section */}
-    <section id="contact" className="relative py-20 md:py-28 overflow-hidden">
+    <section id="contact" data-reveal style={{ '--reveal-delay': '160ms' }} className="relative py-20 md:py-28 overflow-hidden">
       <div className="container mx-auto px-4 md:px-6">
         <div className="max-w-4xl mx-auto">
           <div className="text-center mb-12 animate-fade-up opacity-0">
@@ -323,7 +323,7 @@ const Home = () => {
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 animate-fade-up opacity-0 delay-200">
             <div className="space-y-5">
-              <div className="rounded-2xl border border-primary/35 bg-background/40 backdrop-blur-sm p-5 sm:p-6 hover:border-primary/60 transition-colors">
+              <div data-reveal style={{ '--reveal-delay': '120ms' }} className="rounded-2xl border border-primary/35 bg-background/40 backdrop-blur-sm p-5 sm:p-6 hover:border-primary/60 transition-colors">
                 <div className="flex items-center gap-4">
                   <div className="w-12 h-12 rounded-xl bg-primary/15 text-primary flex items-center justify-center">
                     <Mail size={22} />
@@ -335,7 +335,7 @@ const Home = () => {
                 </div>
               </div>
 
-              <div className="rounded-2xl border border-primary/35 bg-background/40 backdrop-blur-sm p-5 sm:p-6 hover:border-primary/60 transition-colors">
+              <div data-reveal style={{ '--reveal-delay': '200ms' }} className="rounded-2xl border border-primary/35 bg-background/40 backdrop-blur-sm p-5 sm:p-6 hover:border-primary/60 transition-colors">
                 <div className="flex items-center gap-4">
                   <div className="w-12 h-12 rounded-xl bg-primary/15 text-primary flex items-center justify-center">
                     <MapPin size={22} />
@@ -347,7 +347,7 @@ const Home = () => {
                 </div>
               </div>
 
-              <div className="rounded-2xl border border-primary/35 bg-background/40 backdrop-blur-sm p-5 sm:p-6">
+              <div data-reveal style={{ '--reveal-delay': '260ms' }} className="rounded-2xl border border-primary/35 bg-background/40 backdrop-blur-sm p-5 sm:p-6">
                 <p className="text-muted-foreground leading-relaxed">
                   I&apos;m currently open for freelance projects, full-time positions, and collaborations in the Web3 space.
                   Response time is usually within 24 hours.
@@ -355,7 +355,7 @@ const Home = () => {
               </div>
             </div>
 
-            <form action= "https://formsubmit.co/dickyramadhan0x7@gmail.com" method="POST" className="rounded-2xl border border-primary/35 bg-background/40 backdrop-blur-sm p-5 sm:p-6 md:p-7 space-y-5">
+            <form data-reveal style={{ '--reveal-delay': '220ms' }} action= "https://formsubmit.co/dickyramadhan0x7@gmail.com" method="POST" className="rounded-2xl border border-primary/35 bg-background/40 backdrop-blur-sm p-5 sm:p-6 md:p-7 space-y-5">
               <input type="hidden" name="_subject" value="New Message From Website" />
               <input type="hidden" name="_captcha" value="false" />
               <div className="space-y-2">
@@ -407,7 +407,7 @@ const Home = () => {
     </section>
 
     {/* footer */}
-    <footer className="border-t border-primary/20 py-8 md:py-10">
+    <footer data-reveal style={{ '--reveal-delay': '80ms' }} className="border-t border-primary/20 py-8 md:py-10">
       <div className="container mx-auto px-4 md:px-6">
         <div className="flex flex-col md:flex-row items-center justify-between gap-6 text-center md:text-left">
           <a href="#" className="text-2xl font-bold text-gradient neon-glow">

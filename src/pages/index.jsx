@@ -1,9 +1,39 @@
-import { useState } from "react";
+import { useEffect } from "react";
 import FloatingOrb from '../components/floatingOrb'
 import Navbar from "../components/Navbar.jsx";
 import Home from "../components/home.jsx";
 
 const Index = () => {
+    useEffect(() => {
+        const revealElements = Array.from(document.querySelectorAll('[data-reveal]'));
+        if (revealElements.length === 0) return undefined;
+
+        const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        if (reduceMotion) {
+            revealElements.forEach((el) => el.classList.add('reveal-visible'));
+            return undefined;
+        }
+
+        const observer = new IntersectionObserver(
+            (entries, obs) => {
+                entries.forEach((entry) => {
+                    if (!entry.isIntersecting) return;
+                    const element = entry.target;
+                    element.classList.add('reveal-visible');
+                    obs.unobserve(element);
+                });
+            },
+            { threshold: 0.16, rootMargin: '0px 0px -8% 0px' }
+        );
+
+        revealElements.forEach((el) => {
+            el.classList.add('reveal');
+            observer.observe(el);
+        });
+
+        return () => observer.disconnect();
+    }, []);
+
     return (
     <div className='min-h-screen bg-background relative'>
         <FloatingOrb />
