@@ -44,7 +44,7 @@ const Navbar = () => {
     };
   }, [mobileMenuOpen]);
 
-  const navLinks = ['About', 'Projects', 'Contact'];
+  const navLinks = ['About', "Career",'Projects', 'Contact'];
 
   return (
     <nav
@@ -55,7 +55,7 @@ const Navbar = () => {
       <div className="container mx-auto px-10 sm:px-30 lg:px-40">
         <div className="flex items-center justify-between">
           <a href="#" className="font-display text-xl font-bold text-gradient">
-            DEV<span className="text-primary">.</span>FOLIO
+            0xDEV
           </a>
 
           <div className="hidden md:flex items-center gap-8">

@@ -1,6 +1,7 @@
 import { Button } from './ui/Button';
 import { ArrowDown, Github, Twitter, Linkedin, Mail, MapPin, Send, Heart } from 'lucide-react';
 import { createElement, useEffect } from 'react';
+import CareerPath from './CareerPath';
 
 
 const projects = [
@@ -8,7 +9,7 @@ const projects = [
     title: 'Project 1',
     image: '/project1.png',
     titleWeb: "Website Blockchain-Based Diploma Verification",
-    description: 'UMSChain is a web-based decentralized application (dApp) designed to manage the lifecycle of digital certificates, including issuance (minting), decentralized storage, and authenticity verification. The system leverages zkSync Era (Ethereum Layer-2) to ensure immutable and transparent certificate records, while certificate files are stored on IPFS via Pinata. Each certificate is represented as a unique ERC-721 NFT. The application is built using Solidity and Hardhat for smart contract development, zkSync Era for Layer-2 deployment, IPFS (Pinata) for decentralized storage, and React  with Ethers.js for the frontend and blockchain integration.',
+    description: 'UMSChain is a web-based decentralized application (dApp) for issuing, storing, and verifying digital diploma. It uses zkSync Era (Ethereum Layer-2) for immutable on-chain records and IPFS via Pinata for decentralized file storage. Each certificate is minted as a unique ERC-721 NFT. The system is developed with Solidity and Hardhat, deployed on zkSync Era, and integrated into a React frontend using Ethers.js.',
     link: "https://umschain.vercel.app/"},
     {
       title: 'Project 2',
@@ -76,14 +77,14 @@ const Home = () => {
           <div className="text-center lg:text-left">
             {/* Status badge */}
             <div className="animate-fade-up opacity-0 delay-100">
-              <div className="inline-flex items-center gap-2 glass-card px-4 py-2 mb-8">
+              <div className="inline-flex items-center gap-2 glass-card px-4 py-1 mb-8">
                 <span className="w-2 h-2 rounded-full bg-primary animate-pulse" />
                 <span className="text-sm text-muted-foreground">Available for Web2 and Web3 Projects</span>
               </div>
             </div>
             {/* Engineering the Future of Web2 & Web3 */}
             {/* Main heading */}
-            <h1 className="font-display text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold leading-tight mb-6 animate-fade-up opacity-0 delay-200">
+            <h1 className="font-display text-3xl sm:text-3xl md:text-4xl lg:text-5xl font-bold leading-tight mb-6 animate-fade-up opacity-0 delay-200">
               <span className="text-foreground">Engineering the</span>
               <br />
               <span className="text-gradient neon-glow">Future of Web2 & Web3</span>
@@ -93,7 +94,8 @@ const Home = () => {
 
             {/* Subtitle */}
             <p className="text-base sm:text-lg md:text-lg text-muted-foreground max-w-2xl mx-auto lg:mx-0 mb-8 md:mb-10 animate-fade-up opacity-0 delay-300">
-              Full-stack developer building Web2 and Web3 applications,
+              Nice to connect with you all <br />
+             I am Dicky Ramadhan, a Web2 and Web3 developer,
               <span className="hidden sm:inline"><br /></span>
               {' '}including smart contract integration and decentralized features.
             </p>
@@ -102,8 +104,8 @@ const Home = () => {
             <div className="flex flex-col sm:flex-row items-center lg:items-start justify-center lg:justify-start gap-4 mb-10 md:mb-12 animate-fade-up opacity-0 delay-400">
               <div className="relative group">
                 <div className="absolute -inset-1 bg-linear-to-r from-primary via-secondary to-primary rounded-lg blur opacity-75 group-hover:opacity-100 group-hover:blur-md transition duration-500 animate-pulse" />
-                <Button variant="neon" size="lg" className="relative hover:scale-105 transition-transform duration-300 shadow-lg">
-                  <a href="#projects"><span className="relative">View Projects</span></a>
+                <Button variant="neon" size="lg" className="relative text-muted-foreground hover:text-primary transition-all hover:scale-110 hover:bg-emerald-500">
+                  <a href="#contact"><span className="relative">Contact Me</span></a>
                 </Button>
               </div>
             </div>
@@ -188,16 +190,20 @@ const Home = () => {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12 items-center mb-12">
             {/* Left - Text Content */}
             <div className="space-y-6 animate-fade-up opacity-0 delay-200">
-              <p className="text-muted-foreground text-left md:text-justify md:text-lg leading-relaxed">
-                I'm a full-stack developer working across Web2 and Web3 environments, with experience building web applications and integrating blockchain technologies. My interest in software development gradually expanded into exploring decentralized systems and smart contracts.
+              <p className="text-muted-foreground text-justify md:text-justify md:text-lg leading-relaxed">
+                I am a recent Informatics graduate from Universitas Muhammadiyah Surakarta 2022-2026 with a passion for software development and emerging technologies.
               </p>
               
-              <p className="text-muted-foreground text-left md:text-justify md:text-lg leading-relaxed">
-                I focus on developing efficient, maintainable, and user-friendly applications. My work includes building modern web platforms, implementing backend systems, and integrating blockchain features where needed.
+              <p className="text-muted-foreground text-justify md:text-justify md:text-lg leading-relaxed">
+                I’m a full-stack developer working across Web2 and Web3 environments, with experience building web applications and integrating blockchain technologies. My interest in software development gradually expanded into exploring decentralized systems and smart contracts.
               </p>
 
-              <p className="text-muted-foreground text-left md:text-justify md:text-lg leading-relaxed">
-                Outside of development, I enjoy exploring emerging technologies, and continuously improving my technical skills.
+              <p className="text-muted-foreground text-justify md:text-justify md:text-lg leading-relaxed">
+                I focus on developing efficient, maintainable, and user-friendly applications. 
+                My work includes building modern web platforms, implementing backend systems, 
+                and integrating blockchain features where needed.
+                Outside of development, I enjoy exploring emerging technologies and continuously improving
+                 my technical skills to stay adaptable in the rapidly evolving tech landscape.
               </p>
             </div>
 
@@ -216,22 +222,27 @@ const Home = () => {
                 <div className="h-80 sm:h-96 overflow-y-auto snap-y snap-mandatory pt-24 sm:pt-32 pb-24 sm:pb-32 scrollbar-slot scroll-smooth relative">
                   <div className="flex flex-col">
                     {[
-                      { 
-                        title: 'Backend', 
-                        skills: 'Node.js, Python, PHP (Laravel)' 
-                      },
-                      { 
-                        title: 'Frontend', 
-                        skills: 'React, Tailwind CSS, Bootstrap' 
-                      },
-                      { 
-                        title: 'Blockchain', 
-                        skills: 'Solidity, Hardhat, Ethers.js' 
-                      },
-                      { 
-                        title: 'Tools', 
-                        skills: 'Git, WordPress, SAP' 
-                      }].map((skill, index) => (
+                        {
+                          title: 'Programming Languages',
+                          skills: 'JavaScript, Python, PHP, Solidity'
+                        },
+                        {
+                          title: 'Frontend Technologies',
+                          skills: 'React (Library), Tailwind CSS (Framework), Bootstrap (Framework)'
+                        },
+                        {
+                          title: 'Backend Technologies',
+                          skills: 'Python, Laravel (PHP Framework)'
+                        },
+                        {
+                          title: 'Blockchain Development',
+                          skills: 'Solidity (Smart Contract Language), Hardhat (Development Framework), Ethers.js (Library)'
+                        },
+                        {
+                          title: 'Tools & Platforms',
+                          skills: 'Git (Version Control), WordPress (CMS), SAP (Enterprise System)'
+                        }
+                      ].map((skill, index) => (
                       <div 
                         key={index}
                         className="snap-center shrink-0 h-28 sm:h-32 px-3 sm:px-6 lg:px-9 py-2 sm:py-3 flex items-center justify-center transition-all duration-500 ease-out transform"
@@ -262,6 +273,11 @@ const Home = () => {
       <div className="absolute top-1/2 -right-40 w-80 h-80 bg-secondary/10 rounded-full blur-3xl -z-10" />
       <div className="absolute bottom-0 -left-40 w-80 h-80 bg-primary/10 rounded-full blur-3xl -z-10" />
     </section>
+    
+    {/* career path */}
+    <section id='careerpath'>
+      <CareerPath />
+    </section>
 
     {/* project section */}
     <section id="projects" className='relative py-20 md:py-28 overflow-hidden '>
@@ -276,7 +292,7 @@ const Home = () => {
                       {projects.map((project) => 
                       (<div key={project.title} className='flex flex-col justify-center items-center gap-4 sm:gap-5'> <a href={project.link} target="_blank" rel="noopener noreferrer" className='block w-full max-w-lg'>
                         <div className='group relative w-full aspect-video rounded-xl border border-white/20 overflow-hidden hover:scale-[1.02] sm:hover:scale-105 transition-transform duration-300 shadow-lg bg-black/30'>
-                          <img src={project.image} alt={project.title} className='w-full h-full object-contain block'/>
+                          <img src={project.image} alt={project.title} className='w-full h-full object-cover block'/>
                           <div className='absolute inset-0 bg-black/65 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end'>
                             <div className='p-4 translate-y-3 group-hover:translate-y-0 transition-transform duration-300'>
                               <p className='text-xs sm:text-sm text-white text-left sm:text-justify max-h-28 sm:max-h-40 overflow-y-auto pr-1'>{project.description}</p>
@@ -395,13 +411,13 @@ const Home = () => {
       <div className="container mx-auto px-4 md:px-6">
         <div className="flex flex-col md:flex-row items-center justify-between gap-6 text-center md:text-left">
           <a href="#" className="text-2xl font-bold text-gradient neon-glow">
-            DEV.FOLIO
+            Dicky Ramadhan
           </a>
 
           <p className="text-sm text-muted-foreground flex items-center justify-center gap-2">
-            Built with
+            Copyright © 2026 Dicky Ramadhan
             <Heart size={14} className="text-primary" />
-            using React &amp; Web3
+            Web2 &amp; Web3
           </p>
 
           <div className="flex items-center gap-4">
