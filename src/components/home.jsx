@@ -1,6 +1,6 @@
 import { Button } from './ui/Button';
 import { ArrowDown, Github, Twitter, Linkedin, Mail, MapPin, Send, Heart } from 'lucide-react';
-import { createElement, useEffect } from 'react';
+import { createElement, useEffect, useState } from 'react';
 import CareerPath from './CareerPath';
 
 
@@ -25,6 +25,9 @@ const projects = [
       link:"https://github.com/7Demon/capstone"},
 ];
 const Home = () => {
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [formError, setFormError] = useState('');
+
   useEffect(() => {
     const scrollContainer = document.querySelector('.scrollbar-slot');
     if (!scrollContainer) return;
@@ -65,6 +68,54 @@ const Home = () => {
 
     return () => scrollContainer.removeEventListener('scroll', handleScroll);
   }, []);
+
+  const handleContactSubmit = (event) => {
+    const form = event.currentTarget;
+    const formData = new FormData(form);
+
+    const honey = String(formData.get('_honey') || '').trim();
+    if (honey) {
+      event.preventDefault();
+      return;
+    }
+
+    const name = String(formData.get('name') || '').trim();
+    const email = String(formData.get('email') || '').trim();
+    const message = String(formData.get('message') || '').trim();
+    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+    if (!name || !email || !message) {
+      event.preventDefault();
+      setFormError('Semua field wajib diisi.');
+      return;
+    }
+
+    if (!emailPattern.test(email)) {
+      event.preventDefault();
+      setFormError('Format email belum valid.');
+      return;
+    }
+
+    if (message.length < 15) {
+      event.preventDefault();
+      setFormError('Pesan minimal 15 karakter.');
+      return;
+    }
+
+    const lastSubmit = Number(localStorage.getItem('contact_last_submit_at') || 0);
+    const now = Date.now();
+    const cooldownMs = 60 * 1000;
+
+    if (now - lastSubmit < cooldownMs) {
+      event.preventDefault();
+      setFormError('Tunggu 60 detik sebelum kirim pesan lagi.');
+      return;
+    }
+
+    localStorage.setItem('contact_last_submit_at', String(now));
+    setFormError('');
+    setIsSubmitting(true);
+  };
 
     return (
       <>
@@ -355,9 +406,24 @@ const Home = () => {
               </div>
             </div>
 
-            <form data-reveal style={{ '--reveal-delay': '220ms' }} action= "https://formsubmit.co/dickyramadhan0x7@gmail.com" method="POST" className="rounded-2xl border border-primary/35 bg-background/40 backdrop-blur-sm p-5 sm:p-6 md:p-7 space-y-5">
+            <form
+              data-reveal
+              style={{ '--reveal-delay': '220ms' }}
+              action="https://formsubmit.co/dickyramadhan0x7@gmail.com"
+              method="POST"
+              onSubmit={handleContactSubmit}
+              className="rounded-2xl border border-primary/35 bg-background/40 backdrop-blur-sm p-5 sm:p-6 md:p-7 space-y-5"
+            >
               <input type="hidden" name="_subject" value="New Message From Website" />
-              <input type="hidden" name="_captcha" value="false" />
+              <input type="hidden" name="_template" value="table" />
+              <input
+                type="text"
+                name="_honey"
+                tabIndex="-1"
+                autoComplete="off"
+                className="hidden"
+                aria-hidden="true"
+              />
               <div className="space-y-2">
                 <label htmlFor="contact-name" className="text-sm text-foreground/90">Name</label>
                 <input
@@ -365,6 +431,9 @@ const Home = () => {
                   type="text"
                   name='name'
                   placeholder="Your name"
+                  required
+                  minLength={2}
+                  maxLength={80}
                   className="w-full h-11 rounded-xl border border-primary/20 bg-muted/30 px-4 text-foreground placeholder:text-muted-foreground focus:outline-none focus:border-primary/60 transition-colors"
                 />
               </div>
@@ -376,6 +445,8 @@ const Home = () => {
                   type="email"
                   name='email'
                   placeholder="you@example.com"
+                  required
+                  maxLength={120}
                   className="w-full h-11 rounded-xl border border-primary/20 bg-muted/30 px-4 text-foreground placeholder:text-muted-foreground focus:outline-none focus:border-primary/60 transition-colors"
                 />
               </div>
@@ -384,17 +455,30 @@ const Home = () => {
                 <label htmlFor="contact-message" className="text-sm text-foreground/90">Message</label>
                 <textarea
                   id="contact-message"
-                  name='massage'
+                  name='message'
                   rows={3}
                   placeholder="Tell me about your project..."
+                  required
+                  minLength={15}
+                  maxLength={1500}
                   className="w-full rounded-xl border border-primary/20 bg-muted/30 px-4 py-3 text-foreground placeholder:text-muted-foreground focus:outline-none focus:border-primary/60 transition-colors resize-none"
                 />
               </div>
 
-              <Button variant="neon" size="lg" type="submit" className="w-full cursor-pointer hover:bg-emerald-500 transition-colors duration-300">
+              {formError && (
+                <p className="text-sm text-red-300">{formError}</p>
+              )}
+
+              <Button
+                variant="neon"
+                size="lg"
+                type="submit"
+                disabled={isSubmitting}
+                className="w-full cursor-pointer hover:bg-emerald-500 transition-colors duration-300 disabled:opacity-60 disabled:cursor-not-allowed"
+              >
                 <span className="inline-flex items-center gap-2">
                   <Send size={16} />
-                  Send Message
+                  {isSubmitting ? 'Sending...' : 'Send Message'}
                 </span>
               </Button>
             </form>
