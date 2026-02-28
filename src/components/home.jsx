@@ -1,4 +1,4 @@
-import { Button } from './ui/button';
+import { Button } from './ui/Button.jsx';
 import { ArrowDown, Github, Twitter, Linkedin, Mail, MapPin, Send, Heart } from 'lucide-react';
 import { createElement, useEffect } from 'react';
 
