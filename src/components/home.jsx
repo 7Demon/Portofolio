@@ -166,7 +166,7 @@ const Home = () => {
               {[
                 { icon: Github, href: 'https://github.com/7Demon' },
                 { icon: Twitter, href: 'https://x.com/oppp354' },
-                { icon: Linkedin, href: '#' },
+                { icon: Linkedin, href: 'https://www.linkedin.com/in/dicky-ramadhan-b2b591361/' },
               ].map(({ icon, href }, index) => (
                 <a
                   key={index}
@@ -508,7 +508,7 @@ const Home = () => {
             {[
               { icon: Github, href: 'https://github.com/7Demon' },
               { icon: Twitter, href: 'https://x.com/oppp354' },
-              { icon: Linkedin, href: '#' },
+              { icon: Linkedin, href: 'https://www.linkedin.com/in/dicky-ramadhan-b2b591361/' },
             ].map(({ icon, href }, index) => (
               <a
                 key={index}
