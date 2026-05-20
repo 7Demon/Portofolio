@@ -54,34 +54,61 @@ const projects = [
 
 const certificates = [
   {
-    title: 'Solidity Smart Contract Developer',
-    issuer: 'Decentralized Academic Systems',
-    date: '2025',
-    description: 'Credential for advanced smart contract programming, security analysis, and decentralized application architecture.'
+    name: 'Web Development Bootcamp with HTML CSS PHP MySQL Wordpress',
+    image: '/certi1.png',
+    tags: ['HTML5', 'CSS3', 'PHP', 'MySQL', 'WordPress'],
+    description: 'A certificate of completion verifying proficiency in building websites using HTML, CSS, PHP backend programming, MySQL database management, and WordPress CMS integration.'
   },
   {
-    title: 'EF SET English Certificate',
-    issuer: 'EF Education First',
-    date: '2025',
-    description: 'C2 Proficient English language level verification, showing professional-grade communication skills.'
+    name: 'Git & GitHub Bootcamp In 2025: The Complete-Practical Guide',
+    image: '/certi2.png',
+    tags: ['Git', 'GitHub', 'Version Control', 'Workflow'],
+    description: 'Practical training on repository management, branching, merging, conflict resolution, collaborative teamwork, and standard development workflows.'
   },
   {
-    title: 'Bachelor of Informatics',
-    issuer: 'Universitas Muhammadiyah Surakarta',
-    date: '2026',
-    description: 'Completed Bachelor\'s degree focusing on software engineering, blockchain systems, and system security.'
+    name: 'Build a Modern REST API with PHP 8, from Scratch!',
+    image: '/certi3.png',
+    tags: ['PHP 8', 'REST API', 'Backend', 'Web Services'],
+    description: 'Hands-on validation of skills in designing, implementing, and securing RESTful Web APIs using native PHP 8 and clean software architecture.'
   },
   {
-    title: 'Google IT Support Professional Certificate',
-    issuer: 'Coursera / Google',
-    date: '2024',
-    description: 'Covers troubleshooting, customer service, networking, operating systems, system administration, and security.'
+    name: 'Mastering Solidity, the Ethereum Programming Language',
+    image: '/certi4.png',
+    tags: ['Solidity', 'Ethereum', 'Smart Contracts', 'Web3'],
+    description: 'Advanced credentials covering blockchain architecture, Solidity smart contract programming, security vulnerability mitigation, and decentralized protocol integration.'
+  },
+  {
+    name: 'Complete JAVASCRIPT with HTML5, CSS3 from zero to Expert-2025',
+    image: '/certi5.png',
+    tags: ['JavaScript', 'ES6+', 'HTML5', 'CSS3', 'DOM API'],
+    description: 'Expert-level training covering advanced core JavaScript features, asynchronous operations, interactive DOM structures, and clean coding concepts.'
+  },
+  {
+    name: 'Java OOP: Object Oriented Programming with Exercises - 2025',
+    image: '/certi6.png',
+    tags: ['Java', 'OOP', 'Software Engineering', 'Algorithms'],
+    description: 'Deep dive into Object-Oriented Programming (OOP) paradigms in Java, including encapsulation, inheritance, polymorphism, abstraction, and unit exercises.'
+  },
+  {
+    name: 'International Conference on SIML 2025',
+    image: '/certi7.png',
+    tags: ['Artificial Intelligence', 'IoT', 'Machine Learning', 'Smart Computing'],
+    description: 'Attended the International Conference on Smart Computing, IoT and Machine Learning (SIML 2025) with focus on "Harnessing Artificial Intelligence and Smart Technologies to Build Sustainable, Inclusive, and Resilient Communities".'
   }
 ];
 
 const Home = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [formError, setFormError] = useState('');
+  const [selectedCert, setSelectedCert] = useState(null);
+
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      if (e.key === 'Escape') setSelectedCert(null);
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, []);
 
   useEffect(() => {
     const scrollContainer = document.querySelector('.scrollbar-slot');
@@ -559,21 +586,55 @@ const Home = () => {
                         scrollSnapStop: 'always'
                       }}
                     >
-                      <div className="cert-card w-full glass-card p-6 rounded-xl border border-primary/20 transition-all duration-500 hover:border-primary/50 flex flex-col justify-between h-64"
+                      <div 
+                        className="cert-card w-full glass-card flex flex-col justify-between overflow-hidden border border-primary/20 transition-all duration-500 hover:border-primary/50 h-[400px]"
                         data-cert-index={index}
                       >
-                        <div>
-                          <div className="flex items-start justify-between mb-4">
-                            <span className="text-xs text-primary font-mono tracking-wider uppercase bg-primary/10 px-2.5 py-1 rounded-md">
-                              {cert.date}
-                            </span>
-                            <Award className="text-secondary w-6 h-6 animate-pulse" />
+                        <div 
+                          className="relative w-full aspect-video overflow-hidden border-b border-primary/10 bg-black/40 cursor-pointer group"
+                          onClick={() => setSelectedCert(cert.image)}
+                        >
+                          <img
+                            src={cert.image}
+                            alt={cert.name}
+                            className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                          />
+                          <div className="absolute top-3 right-3 bg-slate-950/80 backdrop-blur-md px-3 py-1 rounded-full border border-primary/20 z-10">
+                            <span className="text-[10px] font-mono text-primary font-bold tracking-wider uppercase">Cert {index + 1}</span>
                           </div>
-                          <h3 className="text-foreground font-bold text-lg sm:text-xl mb-2 line-clamp-2 transition-colors duration-500">
-                            {cert.title}
-                          </h3>
-                          <p className="text-muted-foreground text-sm font-semibold mb-2">{cert.issuer}</p>
-                          <p className="text-muted-foreground text-xs line-clamp-3 leading-relaxed">{cert.description}</p>
+                          {/* Hover Overlay */}
+                          <div className="absolute inset-0 bg-slate-950/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                            <span className="text-xs font-mono text-foreground bg-slate-950/85 px-3 py-1.5 rounded-lg border border-primary/30 backdrop-blur-sm">
+                              Click to View Full Size
+                            </span>
+                          </div>
+                        </div>
+
+                        <div className="p-6 flex-1 flex flex-col justify-between">
+                          <div>
+                            <h3 className="text-base sm:text-lg font-bold text-foreground mb-2 line-clamp-2 font-display">{cert.name}</h3>
+                            <p className="text-xs sm:text-sm text-muted-foreground leading-relaxed mb-4 text-justify line-clamp-3">{cert.description}</p>
+                          </div>
+
+                          <div>
+                            <div className="flex flex-wrap gap-1 mb-4">
+                              {cert.tags.map((tag) => (
+                                <span key={tag} className="text-[9px] font-mono bg-primary/10 text-primary border border-primary/10 px-1.5 py-0.5 rounded">
+                                  {tag}
+                                </span>
+                              ))}
+                            </div>
+
+                            <div className="flex items-center gap-4 pt-3 border-t border-primary/10">
+                              <button
+                                onClick={() => setSelectedCert(cert.image)}
+                                className="flex items-center gap-1.5 text-xs font-mono text-primary hover:text-cyan-300 font-bold transition-colors cursor-pointer"
+                              >
+                                <Send size={12} />
+                                View Certificate
+                              </button>
+                            </div>
+                          </div>
                         </div>
                       </div>
                     </div>
@@ -755,6 +816,31 @@ const Home = () => {
           </div>
         </div>
       </footer>
+
+      {/* Lightbox Modal */}
+      {selectedCert && (
+        <div 
+          className="fixed inset-0 z-50 flex items-center justify-center bg-black/85 backdrop-blur-md p-4 transition-all duration-300"
+          onClick={() => setSelectedCert(null)}
+        >
+          <div 
+            className="relative max-w-4xl max-h-[90vh] w-full flex flex-col items-center justify-center"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <button 
+              onClick={() => setSelectedCert(null)}
+              className="absolute -top-12 right-0 text-muted-foreground hover:text-foreground text-sm font-mono flex items-center gap-1 border border-primary/20 bg-slate-950/80 px-3 py-1 rounded-lg hover:border-primary/50 transition-all cursor-pointer"
+            >
+              Close [Esc]
+            </button>
+            <img 
+              src={selectedCert} 
+              alt="Certificate Details" 
+              className="max-w-full max-h-[80vh] object-contain rounded-lg border border-primary/30 shadow-[0_0_50px_rgba(6,182,212,0.15)] animate-scale-in"
+            />
+          </div>
+        </div>
+      )}
     </>)
 }
 export default Home;
