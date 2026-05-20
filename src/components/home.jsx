@@ -1,29 +1,66 @@
 import { Button } from './ui/Button';
-import { ArrowDown, Github, Twitter, Linkedin, Mail, MapPin, Send, Heart } from 'lucide-react';
+import { ArrowDown, Github, Twitter, Linkedin, Mail, MapPin, Send, Heart, Award } from 'lucide-react';
 import { createElement, useEffect, useState } from 'react';
 import CareerPath from './CareerPath';
 
 
 const projects = [
   {
-    title: 'Project 1',
+    name: 'UMSChain',
+    tagline: 'Blockchain-Based Diploma Verification',
     image: '/project1.png',
-    titleWeb: "Website Blockchain-Based Diploma Verification",
-    description: 'UMSChain is a web-based decentralized application (dApp) for issuing, storing, and verifying digital diploma. It uses zkSync Era (Ethereum Layer-2) for immutable on-chain records and IPFS via Pinata for decentralized file storage. Each certificate is minted as a unique ERC-721 NFT. The system is developed with Solidity and Hardhat, deployed on zkSync Era, and integrated into a React frontend using Ethers.js.',
-    link: "https://umschain.vercel.app/"},
-    {
-      title: 'Project 2',
-      image: '/project2.png',
-      titleWeb: "News Website",
-      description: 'A news web application built with PHP (Laravel) and MySQL, featuring article management, category organization, user authentication, and an MVC-based architecture for structured and maintainable development.',
-      link:"https://github.com/7Demon/web_news"},
-    {
-      title: 'Project 3',
-      image: '/project3.png',
-      titleWeb: "Mobile Application to do list and manage tasks",
-      description: 'A mobile task management application built with Java in Android Studio, using SQLite for local data storage. The app supports task creation, updates, deletion, and offline data persistence through CRUD implementation.',
-      link:"https://github.com/7Demon/capstone"},
+    tags: ['Solidity', 'zkSync Era', 'React.js', 'Ethers.js', 'Hardhat', 'IPFS'],
+    description: 'UMSChain is a web-based decentralized application (dApp) for issuing, storing, and verifying digital academic diplomas. It leverages zkSync Era (Ethereum Layer-2) for immutable on-chain records and IPFS (via Pinata) for decentralized storage, minting each diploma as an ERC-721 NFT.',
+    link: 'https://umschain.vercel.app/',
+    github: 'https://github.com/7Demon/ums-chain'
+  },
+  {
+    name: 'Laravel News Portal',
+    tagline: 'Full-Stack MVC News Application',
+    image: '/project2.png',
+    tags: ['PHP', 'Laravel', 'MySQL', 'Bootstrap', 'MVC Architecture'],
+    description: 'A robust web application featuring complete administrative CRUD, dynamic article management, category indexing, secure user authentication, and comments flow, structured strictly under Laravel MVC pattern.',
+    link: 'https://github.com/7Demon/web_news',
+    github: 'https://github.com/7Demon/web_news'
+  },
+  {
+    name: 'TaskFlow Mobile',
+    tagline: 'Java-Based Offline Task Organizer',
+    image: '/project3.png',
+    tags: ['Java', 'Android SDK', 'SQLite', 'XML Layouts'],
+    description: 'An offline-first Android task manager built with native Java. Utilizes SQLite for robust CRUD operations, categorization, priority sorting, and local notification alerts.',
+    link: 'https://github.com/7Demon/capstone',
+    github: 'https://github.com/7Demon/capstone'
+  }
 ];
+
+const certificates = [
+  {
+    title: 'Solidity Smart Contract Developer',
+    issuer: 'Decentralized Academic Systems',
+    date: '2025',
+    description: 'Credential for advanced smart contract programming, security analysis, and decentralized application architecture.'
+  },
+  {
+    title: 'EF SET English Certificate',
+    issuer: 'EF Education First',
+    date: '2025',
+    description: 'C2 Proficient English language level verification, showing professional-grade communication skills.'
+  },
+  {
+    title: 'Bachelor of Informatics',
+    issuer: 'Universitas Muhammadiyah Surakarta',
+    date: '2026',
+    description: 'Completed Bachelor\'s degree focusing on software engineering, blockchain systems, and system security.'
+  },
+  {
+    title: 'Google IT Support Professional Certificate',
+    issuer: 'Coursera / Google',
+    date: '2024',
+    description: 'Covers troubleshooting, customer service, networking, operating systems, system administration, and security.'
+  }
+];
+
 const Home = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [formError, setFormError] = useState('');
@@ -32,41 +69,92 @@ const Home = () => {
     const scrollContainer = document.querySelector('.scrollbar-slot');
     if (!scrollContainer) return;
 
+    let ticking = false;
+
     const handleScroll = () => {
-      const cards = scrollContainer.querySelectorAll('.skill-card');
-      const containerRect = scrollContainer.getBoundingClientRect();
-      const containerCenter = containerRect.height / 2 + containerRect.top;
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          const cards = scrollContainer.querySelectorAll('.skill-card');
+          const containerRect = scrollContainer.getBoundingClientRect();
+          const containerCenter = containerRect.height / 2 + containerRect.top;
 
-      cards.forEach((card) => {
-        const cardRect = card.getBoundingClientRect();
-        const cardCenter = cardRect.top + cardRect.height / 2;
-        const distance = Math.abs(cardCenter - containerCenter);
-        const maxDistance = containerRect.height / 2;
-        const ratio = Math.max(0, 1 - distance / maxDistance);
+          cards.forEach((card) => {
+            const cardRect = card.getBoundingClientRect();
+            const cardCenter = cardRect.top + cardRect.height / 2;
+            const distance = Math.abs(cardCenter - containerCenter);
+            const maxDistance = containerRect.height / 2;
+            const ratio = Math.max(0, 1 - distance / maxDistance);
 
-        // Scale dan opacity based on distance from center
-        const scale = 0.8 + ratio * 0.3;
-        const opacity = 0.4 + ratio * 0.6;
-        const brightness = 1 + ratio * 0.3;
-        const glow = ratio * 20;
+            // Scale and opacity based on distance from center
+            const scale = 0.8 + ratio * 0.3;
+            const opacity = 0.4 + ratio * 0.6;
 
-        card.style.transform = `scale(${scale})`;
-        card.style.opacity = opacity;
-        card.style.filter = `brightness(${brightness}) drop-shadow(0 0 ${glow}px hsl(175 80% 50% / ${ratio * 0.8}))`;
-        
-        // Highlight center item
-        if (ratio > 0.9) {
-          card.parentElement.classList.add('center-item');
-        } else {
-          card.parentElement.classList.remove('center-item');
-        }
-      });
+            card.style.transform = `scale(${scale})`;
+            card.style.opacity = opacity;
+            
+            // Highlight center item
+            if (ratio > 0.9) {
+              card.parentElement.classList.add('center-item');
+            } else {
+              card.parentElement.classList.remove('center-item');
+            }
+          });
+          ticking = false;
+        });
+        ticking = true;
+      }
     };
 
     scrollContainer.addEventListener('scroll', handleScroll);
     handleScroll(); // Initial call
 
     return () => scrollContainer.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  useEffect(() => {
+    const scrollContainerCert = document.querySelector('.scrollbar-slot-horizontal');
+    if (!scrollContainerCert) return;
+
+    let ticking = false;
+
+    const handleScrollCert = () => {
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          const cards = scrollContainerCert.querySelectorAll('.cert-card');
+          const containerRect = scrollContainerCert.getBoundingClientRect();
+          const containerCenter = containerRect.width / 2 + containerRect.left;
+
+          cards.forEach((card) => {
+            const cardRect = card.getBoundingClientRect();
+            const cardCenter = cardRect.left + cardRect.width / 2;
+            const distance = Math.abs(cardCenter - containerCenter);
+            const maxDistance = containerRect.width / 2;
+            const ratio = Math.max(0, 1 - distance / maxDistance);
+
+            // Scale and opacity based on distance from center
+            const scale = 0.85 + ratio * 0.15;
+            const opacity = 0.4 + ratio * 0.6;
+
+            card.style.transform = `scale(${scale})`;
+            card.style.opacity = opacity;
+            
+            // Highlight center item
+            if (ratio > 0.95) {
+              card.parentElement.classList.add('center-item-horizontal');
+            } else {
+              card.parentElement.classList.remove('center-item-horizontal');
+            }
+          });
+          ticking = false;
+        });
+        ticking = true;
+      }
+    };
+
+    scrollContainerCert.addEventListener('scroll', handleScrollCert);
+    handleScrollCert(); // Initial call
+
+    return () => scrollContainerCert.removeEventListener('scroll', handleScrollCert);
   }, []);
 
   const handleContactSubmit = (event) => {
@@ -153,12 +241,12 @@ const Home = () => {
 
             {/* CTA Buttons */}
             <div className="flex flex-col sm:flex-row items-center lg:items-start justify-center lg:justify-start gap-4 mb-10 md:mb-12 animate-fade-up opacity-0 delay-400">
-              <div className="relative group">
-                <div className="absolute -inset-1 bg-linear-to-r from-primary via-secondary to-primary rounded-lg blur opacity-75 group-hover:opacity-100 group-hover:blur-md transition duration-500 animate-pulse" />
-                <Button variant="neon" size="lg" className="relative text-muted-foreground hover:text-primary transition-all hover:scale-110 hover:bg-emerald-500">
-                  <a href="#contact"><span className="relative">Contact Me</span></a>
-                </Button>
-              </div>
+              <Button size="lg" asChild>
+                <a href="#contact">Contact Me</a>
+              </Button>
+              <Button variant="outline" size="lg" asChild>
+                <a href="#projects">View Works</a>
+              </Button>
             </div>
 
             {/* Social links */}
@@ -179,37 +267,37 @@ const Home = () => {
             </div>
           </div>
 
-          {/* Right Hero Placeholder */}
-          <div className="relative h-75 sm:h-90 md:h-105 lg:h-125 animate-fade-up opacity-0 delay-300">
-            {/* Background gradient orb */}
-            <div className="absolute inset-0 bg-linear-to-br from-primary/20 via-transparent to-secondary/20 rounded-3xl blur-3xl animate-pulse" />
+          {/* Right Hero Content - Interactive Avatar Showcase */}
+          <div className="relative flex justify-center items-center animate-fade-up opacity-0 delay-300 h-80 sm:h-96 md:h-[450px] lg:h-[500px]">
+            {/* Background glowing gradient orb */}
+            <div className="absolute w-72 h-72 sm:w-96 sm:h-96 bg-linear-to-br from-primary/30 to-secondary/30 rounded-full blur-3xl animate-pulse-slow" />
             
-            {/* Main placeholder box with animation */}
-            <div className="absolute inset-0 rounded-3xl border border-primary/20 overflow-hidden group">
-              {/* Animated background */}
-              <div className="absolute inset-0 bg-linear-to-br from-primary/10 to-secondary/10 backdrop-blur-sm" />
+            <div className="relative w-72 h-72 sm:w-80 sm:h-80 md:w-96 md:h-96 flex items-center justify-center">
+              {/* Outer rotating dashed tech-ring */}
+              <div className="absolute inset-0 rounded-full border border-dashed border-primary/40 animate-[spin_40s_linear_infinite]" />
               
-              {/* Animated gradient border */}
-              <div className="absolute inset-0 rounded-3xl border-2 border-transparent bg-clip-padding animate-spin" style={{
-                borderImage: 'linear-gradient(45deg, #3b82f6, #8b5cf6, #ec4899, #3b82f6) 1',
-                animationDuration: '8s'
-              }} />
+              {/* Middle glowing solid ring */}
+              <div className="absolute inset-4 rounded-full border-2 border-secondary/35 animate-[spin_25s_linear_infinite_reverse] shadow-[0_0_20px_rgba(139,92,246,0.15)]" />
               
-              {/* Content */}
-              <div className="absolute inset-0 flex flex-col items-center justify-center gap-4 p-6">
-                <div className="relative">
-                  {/* Pulsing ring */}
-                  <div className="absolute inset-0 rounded-full border-2 border-primary/50 animate-pulse w-24 h-24 sm:w-30 sm:h-30" />
-                  
-                  {/* Icon placeholder with rotation */}
-                  <div className="w-24 h-24 sm:w-32 sm:h-32 rounded-full bg-linear-to-br from-primary to-secondary flex items-center justify-center animate-bounce" style={{
-                    animationDuration: '2s'
-                  }}>
-                    <svg className="w-12 h-12 sm:w-16 sm:h-16 text-white animate-spin" style={{animationDuration: '3s'}} fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
-                    </svg>
-                  </div>
-                </div>
+              {/* Main Avatar Frame */}
+              <div className="absolute inset-8 rounded-full overflow-hidden border-2 border-primary/60 shadow-[0_0_40px_hsl(175_80%_50%/_0.3)] bg-slate-950/80 group z-10">
+                <img 
+                  src="/developer_avatar.png" 
+                  alt="Dicky Ramadhan Developer Avatar" 
+                  className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                />
+              </div>
+
+              {/* Floating Tech Badge 1 - Solidity */}
+              <div className="absolute -top-1 -right-4 glass-card px-4 py-2 border border-primary/30 rounded-xl flex items-center gap-2 animate-bounce shadow-lg z-20" style={{ animationDuration: '3.5s' }}>
+                <span className="flex h-2 w-2 rounded-full bg-primary animate-ping" />
+                <span className="text-xs font-mono text-foreground font-bold">Web2 & Web3</span>
+              </div>
+
+              {/* Floating Tech Badge 2 - Graduate */}
+              <div className="absolute -bottom-1 -left-4 glass-card px-4 py-2 border border-secondary/35 rounded-xl flex items-center gap-2 animate-bounce shadow-lg z-20" style={{ animationDuration: '4.5s' }}>
+                <span className="flex h-2 w-2 rounded-full bg-secondary animate-ping" />
+                <span className="text-xs font-mono text-foreground font-bold">Informatics Graduate</span>
               </div>
             </div>
           </div>
@@ -230,11 +318,14 @@ const Home = () => {
         <div className="max-w-6xl mx-auto">
           {/* Section Title */}
           <div className="mb-12 md:mb-16 text-center animate-fade-up opacity-0">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-primary/20 bg-primary/5 mb-4">
+              <span className="text-xs font-mono text-primary font-bold tracking-widest uppercase">01 / Profile</span>
+            </div>
             <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4">
               <span className="text-foreground">About</span>
               <span className="text-gradient neon-glow ml-2">Me</span>
             </h2>
-            <div className="w-16 h-1 bg-linear-to-r from-primary to-secondary rounded-full mx-auto"></div>
+            <div className="w-16 h-1 bg-linear-to-r from-primary to-secondary rounded-full mx-auto mt-4"></div>
           </div>
 
           {/* Content Grid */}
@@ -331,32 +422,151 @@ const Home = () => {
     </section>
 
     {/* project section */}
-    <section id="projects" data-reveal style={{ '--reveal-delay': '140ms' }} className='relative py-20 md:py-28 overflow-hidden '>
+    <section id="projects" data-reveal style={{ '--reveal-delay': '140ms' }} className='relative py-20 md:py-28 overflow-hidden'>
         <div className='container mx-auto px-4 md:px-6'>
             <div className='content-center mx-auto'>
                     {/* title */}
-                    <div className='text-center mb-12 md:mb-16 animate-fade-up opacity-0'>
-                        <h2 className="text-3xl md:text-4xl font-bold text-linear neon-glow">PROJECTS</h2>
+                    <div className="mb-12 md:mb-16 text-center animate-fade-up opacity-0">
+                      <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-primary/20 bg-primary/5 mb-4">
+                        <span className="text-xs font-mono text-primary font-bold tracking-widest uppercase">03 / Projects</span>
+                      </div>
+                      <h2 className="font-display text-4xl md:text-5xl font-bold mb-4">
+                        <span className="text-foreground">Featured</span>
+                        <span className="text-gradient neon-glow ml-2">Creations</span>
+                      </h2>
+                      <div className="w-16 h-1 bg-linear-to-r from-primary to-secondary rounded-full mx-auto mt-4"></div>
                     </div>
                     {/* content */}
-                    <div className='grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8 animate-fade-up opacity-0 delay-200 mx-auto max-w-6xl px-0 sm:px-4'>
-                      {projects.map((project, index) => 
-                      (<div key={project.title} data-reveal style={{ '--reveal-delay': `${index * 90}ms` }} className='flex flex-col justify-center items-center gap-4 sm:gap-5'> <a href={project.link} target="_blank" rel="noopener noreferrer" className='block w-full max-w-lg'>
-                        <div className='group relative w-full aspect-video rounded-xl border border-white/20 overflow-hidden hover:scale-[1.02] sm:hover:scale-105 transition-transform duration-300 shadow-lg bg-black/30'>
-                          <img src={project.image} alt={project.title} className='w-full h-full object-cover block'/>
-                          <div className='absolute inset-0 bg-black/65 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end'>
-                            <div className='p-4 translate-y-3 group-hover:translate-y-0 transition-transform duration-300'>
-                              <p className='text-xs sm:text-sm text-white text-left sm:text-justify max-h-28 sm:max-h-40 overflow-y-auto pr-1'>{project.description}</p>
+                    <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 animate-fade-up opacity-0 delay-200 mx-auto max-w-6xl px-4'>
+                      {projects.map((project, index) => (
+                        <div 
+                          key={project.name} 
+                          data-reveal 
+                          style={{ '--reveal-delay': `${index * 100}ms` }} 
+                          className='glass-card flex flex-col justify-between overflow-hidden border border-primary/25 hover:border-primary/50 transition-all duration-300 hover:-translate-y-2'
+                        >
+                          <div className='relative w-full aspect-video overflow-hidden border-b border-primary/10 bg-black/40'>
+                            <img 
+                              src={project.image} 
+                              alt={project.name} 
+                              className='w-full h-full object-cover transition-transform duration-500 hover:scale-105'
+                            />
+                            <div className='absolute top-3 right-3 bg-slate-950/80 backdrop-blur-md px-3 py-1 rounded-full border border-primary/20 z-10'>
+                              <span className="text-[10px] font-mono text-primary font-bold tracking-wider uppercase">Project {index + 1}</span>
                             </div>
                           </div>
-                        </div></a>
-                        <div className='px-1 sm:px-2'>
-                              <h3 className='text-base sm:text-lg text-center font-bold text-foreground mb-2'>{project.titleWeb}</h3>
+                          
+                          <div className='p-6 flex-1 flex flex-col justify-between'>
+                            <div>
+                              <h3 className='text-xl font-bold text-foreground mb-1 font-display'>{project.name}</h3>
+                              <p className='text-xs font-mono text-secondary mb-3 font-semibold'>{project.tagline}</p>
+                              <p className='text-sm text-muted-foreground leading-relaxed mb-4 text-justify'>{project.description}</p>
+                            </div>
+                            
+                            <div>
+                              <div className='flex flex-wrap gap-1.5 mb-5'>
+                                {project.tags.map((tag) => (
+                                  <span key={tag} className='text-[10px] font-mono bg-primary/10 text-primary border border-primary/10 px-2 py-0.5 rounded'>
+                                    {tag}
+                                  </span>
+                                ))}
+                              </div>
+                              
+                              <div className='flex items-center gap-4 pt-4 border-t border-primary/10'>
+                                <a 
+                                  href={project.link} 
+                                  target="_blank" 
+                                  rel="noopener noreferrer" 
+                                  className='flex items-center gap-1.5 text-xs font-mono text-primary hover:text-cyan-300 font-bold transition-colors'
+                                >
+                                  <Send size={12} />
+                                  Live Demo
+                                </a>
+                                {project.github && (
+                                  <a 
+                                    href={project.github} 
+                                    target="_blank" 
+                                    rel="noopener noreferrer" 
+                                    className='flex items-center gap-1.5 text-xs font-mono text-muted-foreground hover:text-foreground font-bold transition-colors'
+                                  >
+                                    <Github size={12} />
+                                    Source
+                                  </a>
+                                )}
+                              </div>
+                            </div>
+                          </div>
                         </div>
-                      </div>))}
+                      ))}
                     </div>
             </div>
         </div>
+    </section>
+
+    {/* Certificates Section */}
+    <section id="certificates" data-reveal style={{ '--reveal-delay': '150ms' }} className="relative py-20 md:py-28 overflow-hidden">
+      <div className="container mx-auto px-4 md:px-6">
+        <div className="max-w-6xl mx-auto">
+          {/* Section Title */}
+          <div className="mb-12 md:mb-16 text-center animate-fade-up opacity-0">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-primary/20 bg-primary/5 mb-4">
+              <span className="text-xs font-mono text-primary font-bold tracking-widest uppercase">04 / Credentials</span>
+            </div>
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4">
+              <span className="text-foreground">My</span>
+              <span className="text-gradient neon-glow ml-2">Certificates</span>
+            </h2>
+            <div className="w-16 h-1 bg-linear-to-r from-primary to-secondary rounded-full mx-auto mt-4"></div>
+          </div>
+
+          {/* Carousel Layout */}
+          <div className="animate-fade-up opacity-0 delay-300">
+            <div className="relative">
+              {/* Overlay untuk efek slot machine (kiri & kanan) */}
+              <div className="absolute inset-0 pointer-events-none z-20">
+                <div className="absolute top-0 bottom-0 left-0 w-12 sm:w-24 bg-linear-to-r from-background to-transparent" />
+                <div className="absolute top-0 bottom-0 right-0 w-12 sm:w-24 bg-linear-to-l from-background to-transparent" />
+                {/* Center highlight glow */}
+                <div className="absolute left-1/2 -translate-x-1/2 top-0 bottom-0 w-72 sm:w-80 md:w-96 bg-linear-to-r from-primary/10 via-primary/20 to-primary/10 blur-2xl" />
+              </div>
+
+              {/* Scrollable container */}
+              <div className="flex overflow-x-auto snap-x snap-mandatory py-10 px-[15%] sm:px-[30%] md:px-[35%] lg:px-[40%] scrollbar-slot-horizontal scroll-smooth gap-6 relative">
+                {certificates.map((cert, index) => (
+                  <div 
+                    key={index}
+                    className="snap-center shrink-0 w-72 sm:w-80 md:w-96 px-3 flex items-center justify-center transition-all duration-500 ease-out transform"
+                    style={{
+                      scrollSnapAlign: 'center',
+                      scrollSnapStop: 'always'
+                    }}
+                  >
+                    <div className="cert-card w-full glass-card p-6 rounded-xl border border-primary/20 transition-all duration-500 hover:border-primary/50 flex flex-col justify-between h-64" 
+                      data-cert-index={index}
+                    >
+                      <div>
+                        <div className="flex items-start justify-between mb-4">
+                          <span className="text-xs text-primary font-mono tracking-wider uppercase bg-primary/10 px-2.5 py-1 rounded-md">
+                            {cert.date}
+                          </span>
+                          <Award className="text-secondary w-6 h-6 animate-pulse" />
+                        </div>
+                        <h3 className="text-foreground font-bold text-lg sm:text-xl mb-2 line-clamp-2 transition-colors duration-500">
+                          {cert.title}
+                        </h3>
+                        <p className="text-muted-foreground text-sm font-semibold mb-2">{cert.issuer}</p>
+                        <p className="text-muted-foreground text-xs line-clamp-3 leading-relaxed">{cert.description}</p>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      {/* Background decoration */}
+      <div className="absolute top-1/2 -left-40 w-80 h-80 bg-secondary/10 rounded-full blur-3xl -z-10" />
     </section>
 
     {/* contact section */}
@@ -364,10 +574,15 @@ const Home = () => {
       <div className="container mx-auto px-4 md:px-6">
         <div className="max-w-4xl mx-auto">
           <div className="text-center mb-12 animate-fade-up opacity-0">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-primary/20 bg-primary/5 mb-4">
+              <span className="text-xs font-mono text-primary font-bold tracking-widest uppercase">05 / Contact</span>
+            </div>
             <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4">
-              <span className="text-gradient neon-glow">Get In Touch</span>
+              <span className="text-foreground">Get In</span>
+              <span className="text-gradient neon-glow ml-2">Touch</span>
             </h2>
-            <p className="text-muted-foreground text-base md:text-lg">
+            <div className="w-16 h-1 bg-linear-to-r from-primary to-secondary rounded-full mx-auto mt-4"></div>
+            <p className="text-muted-foreground text-base md:text-lg mt-4">
               Have a project in mind? Let&apos;s build something amazing together.
             </p>
           </div>
@@ -470,11 +685,10 @@ const Home = () => {
               )}
 
               <Button
-                variant="neon"
                 size="lg"
                 type="submit"
                 disabled={isSubmitting}
-                className="w-full cursor-pointer hover:bg-emerald-500 transition-colors duration-300 disabled:opacity-60 disabled:cursor-not-allowed"
+                className="w-full cursor-pointer disabled:opacity-60 disabled:cursor-not-allowed"
               >
                 <span className="inline-flex items-center gap-2">
                   <Send size={16} />

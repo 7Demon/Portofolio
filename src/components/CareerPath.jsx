@@ -3,20 +3,20 @@ import { Briefcase, GraduationCap, Rocket, Award, Code2, Zap } from 'lucide-reac
 
 const careers = [
   {
-  year: '2022 - 2026',
-  title: 'Bachelor of Informatics',
-  company: 'University of Technology',
-  description: 'Completed Bachelors degree in Informatics (awaiting graduation ceremony). Thesis: "Implementation of ERC-721 Smart Contract-Based Academic Certificate Issuance and Verification System on zkSync Era Layer-2 to Prevent Academic Document Forgery."',
-  icon: GraduationCap,
-  tags: ['Blockchain', 'Smart Contract', 'IPFS'],
+    year: '2022 - 2026',
+    title: 'Bachelor of Informatics',
+    company: 'Universitas Muhammadiyah Surakarta',
+    description: 'Completed Bachelor\'s degree in Informatics with a strong focus on software engineering and decentralized technologies. Thesis: "Implementation of ERC-721 Smart Contract-Based Academic Certificate Issuance and Verification System on zkSync Era Layer-2 to Prevent Academic Document Forgery."',
+    icon: GraduationCap,
+    tags: ['Blockchain', 'Solidity', 'zkSync Era', 'Smart Contracts', 'IPFS'],
   },
   {
-  year: '2025',
-  title: 'Internship - Web Developer',
-  company: 'Department of Communication and Informatics(Diskominfo)',
-  description: 'Designed and developed web-based applications, handling frontend implementation and API integration to ensure system functionality and reliability..',
-  icon: Code2,
-  tags: ['Web Development', 'Laravel', 'wordpress'],
+    year: '2025',
+    title: 'Internship - Web Developer',
+    company: 'Department of Communication and Informatics (Diskominfo)',
+    description: 'Designed and developed web applications, managing full-stack Laravel flows, API integration, and custom portal solutions to support public communication systems.',
+    icon: Code2,
+    tags: ['Laravel', 'PHP', 'MySQL', 'WordPress', 'Bootstrap'],
   }
 ];
 
@@ -147,10 +147,15 @@ const CareerPath = () => {
       <div className="container mx-auto px-6">
         <div className="max-w-5xl mx-auto">
           {/* Section header */}
-          <div data-reveal style={{ '--reveal-delay': '120ms' }} className="text-center mb-20">
+          <div data-reveal style={{ '--reveal-delay': '120ms' }} className="text-center mb-16">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-primary/20 bg-primary/5 mb-4">
+              <span className="text-xs font-mono text-primary font-bold tracking-widest uppercase">02 / Experience</span>
+            </div>
             <h2 className="font-display text-4xl md:text-5xl font-bold mb-4">
-              <span className="text-gradient">Career Path</span>
+              <span className="text-foreground">Career &</span>
+              <span className="text-gradient neon-glow ml-2">Education</span>
             </h2>
+            <div className="w-16 h-1 bg-linear-to-r from-primary to-secondary rounded-full mx-auto mt-4"></div>
           </div>
 
           {/* Timeline */}

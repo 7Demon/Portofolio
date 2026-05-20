@@ -44,7 +44,7 @@ const Navbar = () => {
     };
   }, [mobileMenuOpen]);
 
-  const navLinks = ['About', "Career",'Projects', 'Contact'];
+  const navLinks = ['About', "Career",'Projects', 'Certificates', 'Contact'];
 
   return (
     <nav
@@ -65,14 +65,10 @@ const Navbar = () => {
               <a
                 key={link}
                 href={`#${link.toLowerCase()}`}
-                className="relative text-sm uppercase tracking-wider font-medium transition-all duration-300 group neon-link"
-                style={{ color: 'hsl(175 80% 50%)' }}
+                className="relative text-xs uppercase tracking-widest font-mono font-bold text-muted-foreground hover:text-foreground transition-colors duration-300 group"
               >
                 {link}
-                <span
-                  className="absolute bottom-0 left-0 w-0 h-0.5 bg-linear-to-r from-cyan-400 to-cyan-300 transition-all duration-300 group-hover:w-full"
-                  style={{ boxShadow: '0 0 10px hsl(175 80% 50% / 0.6)' }}
-                />
+                <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary transition-all duration-300 group-hover:w-full" />
               </a>
             ))}
           </div>
@@ -99,7 +95,7 @@ const Navbar = () => {
                 key={link}
                 href={`#${link.toLowerCase()}`}
                 onClick={() => setMobileMenuOpen(false)}
-                className="text-sm uppercase tracking-wider font-medium text-primary hover:text-cyan-300 transition-colors px-2 py-2 rounded-md hover:bg-primary/10"
+                className="text-xs uppercase tracking-widest font-mono font-bold text-muted-foreground hover:text-foreground transition-colors px-2 py-2.5 rounded-md hover:bg-white/5"
               >
                 {link}
               </a>

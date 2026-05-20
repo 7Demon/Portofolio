@@ -3,47 +3,47 @@
 
 @layer base {
   :root {
-    --background: 222 47% 5%;
+    --background: 224 25% 6%;
     --foreground: 210 40% 98%;
 
-    --card: 222 47% 8%;
+    --card: 224 25% 9%;
     --card-foreground: 210 40% 98%;
 
-    --popover: 222 47% 8%;
+    --popover: 224 25% 9%;
     --popover-foreground: 210 40% 98%;
 
-    --primary: 175 80% 50%;
-    --primary-foreground: 222 47% 5%;
+    --primary: 220 85% 60%;
+    --primary-foreground: 224 25% 6%;
 
-    --secondary: 260 60% 55%;
+    --secondary: 250 50% 65%;
     --secondary-foreground: 210 40% 98%;
 
-    --muted: 222 30% 15%;
-    --muted-foreground: 215 20% 65%;
+    --muted: 224 20% 15%;
+    --muted-foreground: 215 15% 65%;
 
-    --accent: 175 80% 50%;
-    --accent-foreground: 222 47% 5%;
+    --accent: 220 85% 60%;
+    --accent-foreground: 224 25% 6%;
 
     --destructive: 0 84% 60%;
     --destructive-foreground: 210 40% 98%;
 
-    --border: 222 30% 20%;
-    --input: 222 30% 20%;
-    --ring: 175 80% 50%;
+    --border: 224 20% 16%;
+    --input: 224 20% 16%;
+    --ring: 220 85% 60%;
 
     --radius: 0.75rem;
 
-    /* Custom Web3 tokens */
-    --neon-glow: 175 80% 50%;
-    --neon-secondary: 260 60% 55%;
-    --glass-bg: 222 47% 10% / 0.6;
-    --glass-border: 175 80% 50% / 0.2;
+    /* Custom elegant tokens */
+    --neon-glow: 220 85% 60%;
+    --neon-secondary: 250 50% 65%;
+    --glass-bg: 224 25% 10% / 0.7;
+    --glass-border: 220 85% 60% / 0.15;
     
     /* Gradients */
-    --gradient-primary: linear-gradient(135deg, hsl(175 80% 50%), hsl(260 60% 55%));
-    --gradient-text: linear-gradient(90deg, hsl(175 80% 60%), hsl(260 60% 65%), hsl(175 80% 60%));
-    --gradient-orb-1: radial-gradient(circle, hsl(175 80% 50% / 0.4), transparent 70%);
-    --gradient-orb-2: radial-gradient(circle, hsl(260 60% 55% / 0.3), transparent 70%);
+    --gradient-primary: linear-gradient(135deg, hsl(220 85% 60%), hsl(250 50% 65%));
+    --gradient-text: linear-gradient(90deg, hsl(220 85% 65%), #ffffff, hsl(250 50% 70%));
+    --gradient-orb-1: radial-gradient(circle, hsl(220 85% 60% / 0.15), transparent 70%);
+    --gradient-orb-2: radial-gradient(circle, hsl(250 50% 65% / 0.1), transparent 70%);
   }
 }
 
@@ -66,12 +66,12 @@
 
 @layer components {
   .glass-card {
-    background-color: hsl(222 47% 8% / 0.6);
+    background-color: hsl(224 25% 9% / 0.7);
     @apply backdrop-blur-xl rounded-xl;
-    border: 1px solid hsl(175 80% 50% / 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.08);
     box-shadow: 
-      0 0 20px hsl(175 80% 50% / 0.1),
-      inset 0 1px 0 hsl(175 80% 50% / 0.1);
+      0 8px 32px rgba(0, 0, 0, 0.3),
+      inset 0 1px 0 rgba(255, 255, 255, 0.05);
   }
 
   .glass-card-hover {
@@ -79,11 +79,10 @@
   }
 
   .glass-card-hover:hover {
-    border-color: hsl(175 80% 50% / 0.4);
+    border-color: rgba(255, 255, 255, 0.2);
     box-shadow: 
-      0 0 40px hsl(175 80% 50% / 0.2),
-      0 0 80px hsl(175 80% 50% / 0.1),
-      inset 0 1px 0 hsl(175 80% 50% / 0.2);
+      0 12px 40px rgba(0, 0, 0, 0.5),
+      inset 0 1px 0 rgba(255, 255, 255, 0.1);
     transform: translateY(-4px);
   }
 
@@ -97,31 +96,18 @@
   }
 
   .neon-glow {
-    text-shadow: 
-      0 0 10px hsl(175 80% 50% / 0.8),
-      0 0 20px hsl(175 80% 50% / 0.6),
-      0 0 40px hsl(175 80% 50% / 0.4);
+    /* Removed heavy neon text shadow to avoid AI-template look */
+    text-shadow: none;
   }
 
   .neon-border {
     position: relative;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    transition: border-color 0.3s ease;
   }
 
-  .neon-border::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    border-radius: 0.75rem;
-    opacity: 0;
-    transition-property: opacity;
-    transition-duration: 500ms;
-    background: var(--gradient-primary);
-    filter: blur(20px);
-    z-index: -1;
-  }
-
-  .neon-border:hover::before {
-    opacity: 0.5;
+  .neon-border:hover {
+    border-color: hsl(220 85% 60% / 0.5);
   }
 
   .floating-orb {
@@ -323,16 +309,60 @@
   background-clip: padding-box;
 }
 
+/* Slot machine horizontal scrollbar styling */
+.scrollbar-slot-horizontal {
+  scroll-behavior: smooth;
+}
+
+.scrollbar-slot-horizontal::-webkit-scrollbar {
+  height: 6px;
+}
+
+.scrollbar-slot-horizontal::-webkit-scrollbar-track {
+  background: hsl(222 47% 10% / 0.6);
+  border-radius: 10px;
+}
+
+.scrollbar-slot-horizontal::-webkit-scrollbar-thumb {
+  background: linear-gradient(90deg, hsl(175 80% 50%), hsl(260 60% 55%));
+  border-radius: 10px;
+  border: 2px solid transparent;
+  background-clip: padding-box;
+}
+
+.scrollbar-slot-horizontal::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(90deg, hsl(175 80% 60%), hsl(260 60% 65%));
+  background-clip: padding-box;
+}
+
 /* Skill card transitions */
 .skill-card {
   transition: all 0.3s ease-out !important;
-  will-change: transform, opacity, filter;
+  will-change: transform, opacity;
 }
 
 .center-item .skill-card {
-  border-color: hsl(175 80% 50% / 0.8) !important;
-  background: linear-gradient(135deg, hsl(175 80% 50% / 0.1), hsl(260 60% 55% / 0.1)) !important;
+  border-color: hsl(220 85% 60% / 0.6) !important;
+  background: hsl(224 25% 12% / 0.9) !important;
+  box-shadow: 
+    0 8px 30px rgba(0, 0, 0, 0.4),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08) !important;
 }
+
+/* Cert card transitions */
+.cert-card {
+  transition: all 0.3s ease-out !important;
+  will-change: transform, opacity;
+}
+
+.center-item-horizontal .cert-card {
+  border-color: hsl(220 85% 60% / 0.6) !important;
+  background: hsl(224 25% 12% / 0.9) !important;
+  box-shadow: 
+    0 8px 30px rgba(0, 0, 0, 0.4),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08) !important;
+}
+
 
 @media (prefers-reduced-motion: reduce) {
   .reveal,
