@@ -114,34 +114,55 @@ const Home = () => {
     const scrollContainer = document.querySelector('.scrollbar-slot');
     if (!scrollContainer) return;
 
+    let cardsData = [];
+    const updateCache = () => {
+      const cards = scrollContainer.querySelectorAll('.skill-card');
+      cardsData = Array.from(cards).map((card) => {
+        let offsetTop = card.offsetTop;
+        let parent = card.offsetParent;
+        while (parent && parent !== scrollContainer) {
+          offsetTop += parent.offsetTop;
+          parent = parent.offsetParent;
+        }
+        return {
+          element: card,
+          parentEl: card.parentElement,
+          offsetTop: offsetTop,
+          height: card.offsetHeight
+        };
+      });
+    };
+
+    updateCache();
+    window.addEventListener('resize', updateCache);
+
     let ticking = false;
 
     const handleScroll = () => {
       if (!ticking) {
         window.requestAnimationFrame(() => {
-          const cards = scrollContainer.querySelectorAll('.skill-card');
-          const containerRect = scrollContainer.getBoundingClientRect();
-          const containerCenter = containerRect.height / 2 + containerRect.top;
+          const scrollTop = scrollContainer.scrollTop;
+          const containerHeight = scrollContainer.clientHeight;
+          const containerCenter = scrollTop + containerHeight / 2;
 
-          cards.forEach((card) => {
-            const cardRect = card.getBoundingClientRect();
-            const cardCenter = cardRect.top + cardRect.height / 2;
+          cardsData.forEach((card) => {
+            const cardCenter = card.offsetTop + card.height / 2;
             const distance = Math.abs(cardCenter - containerCenter);
-            const maxDistance = containerRect.height / 2;
+            const maxDistance = containerHeight / 2;
             const ratio = Math.max(0, 1 - distance / maxDistance);
 
             // Scale and opacity based on distance from center
             const scale = 0.8 + ratio * 0.3;
             const opacity = 0.4 + ratio * 0.6;
 
-            card.style.transform = `scale(${scale})`;
-            card.style.opacity = opacity;
+            card.element.style.transform = `scale(${scale})`;
+            card.element.style.opacity = opacity;
 
             // Highlight center item
             if (ratio > 0.9) {
-              card.parentElement.classList.add('center-item');
+              card.parentEl.classList.add('center-item');
             } else {
-              card.parentElement.classList.remove('center-item');
+              card.parentEl.classList.remove('center-item');
             }
           });
           ticking = false;
@@ -153,41 +174,65 @@ const Home = () => {
     scrollContainer.addEventListener('scroll', handleScroll);
     handleScroll(); // Initial call
 
-    return () => scrollContainer.removeEventListener('scroll', handleScroll);
+    return () => {
+      scrollContainer.removeEventListener('scroll', handleScroll);
+      window.removeEventListener('resize', updateCache);
+    };
   }, []);
 
   useEffect(() => {
     const scrollContainerCert = document.querySelector('.scrollbar-slot-horizontal');
     if (!scrollContainerCert) return;
 
+    let cardsData = [];
+    const updateCache = () => {
+      const cards = scrollContainerCert.querySelectorAll('.cert-card');
+      cardsData = Array.from(cards).map((card) => {
+        let offsetLeft = card.offsetLeft;
+        let parent = card.offsetParent;
+        while (parent && parent !== scrollContainerCert) {
+          offsetLeft += parent.offsetLeft;
+          parent = parent.offsetParent;
+        }
+        return {
+          element: card,
+          parentEl: card.parentElement,
+          offsetLeft: offsetLeft,
+          width: card.offsetWidth
+        };
+      });
+    };
+
+    updateCache();
+    window.addEventListener('resize', updateCache);
+
     let ticking = false;
 
     const handleScrollCert = () => {
       if (!ticking) {
         window.requestAnimationFrame(() => {
-          const cards = scrollContainerCert.querySelectorAll('.cert-card');
-          const containerRect = scrollContainerCert.getBoundingClientRect();
-          const containerCenter = containerRect.width / 2 + containerRect.left;
+          const scrollLeft = scrollContainerCert.scrollLeft;
+          const containerWidth = scrollContainerCert.clientWidth;
+          const containerCenter = scrollLeft + containerWidth / 2;
 
-          cards.forEach((card) => {
-            const cardRect = card.getBoundingClientRect();
-            const cardCenter = cardRect.left + cardRect.width / 2;
+          cardsData.forEach((card) => {
+            const cardCenter = card.offsetLeft + card.width / 2;
             const distance = Math.abs(cardCenter - containerCenter);
-            const maxDistance = containerRect.width / 2;
+            const maxDistance = containerWidth / 2;
             const ratio = Math.max(0, 1 - distance / maxDistance);
 
             // Scale and opacity based on distance from center
             const scale = 0.85 + ratio * 0.15;
             const opacity = 0.4 + ratio * 0.6;
 
-            card.style.transform = `scale(${scale})`;
-            card.style.opacity = opacity;
+            card.element.style.transform = `scale(${scale})`;
+            card.element.style.opacity = opacity;
 
             // Highlight center item
             if (ratio > 0.95) {
-              card.parentElement.classList.add('center-item-horizontal');
+              card.parentEl.classList.add('center-item-horizontal');
             } else {
-              card.parentElement.classList.remove('center-item-horizontal');
+              card.parentEl.classList.remove('center-item-horizontal');
             }
           });
           ticking = false;
@@ -199,7 +244,10 @@ const Home = () => {
     scrollContainerCert.addEventListener('scroll', handleScrollCert);
     handleScrollCert(); // Initial call
 
-    return () => scrollContainerCert.removeEventListener('scroll', handleScrollCert);
+    return () => {
+      scrollContainerCert.removeEventListener('scroll', handleScrollCert);
+      window.removeEventListener('resize', updateCache);
+    };
   }, []);
 
   const handleContactSubmit = (event) => {
