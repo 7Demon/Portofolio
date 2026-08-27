@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react';
-import { Menu, X, Sun, Moon } from 'lucide-react';
+import { Menu, X, Sun, Moon, Sparkles } from 'lucide-react';
 import { useTheme } from '../context/useTheme.js';
-
 
 const Navbar = () => {
   const { theme, toggleTheme } = useTheme();
@@ -19,9 +18,8 @@ const Navbar = () => {
 
   useEffect(() => {
     const handleScroll = () => {
-      setScrolled(window.scrollY > 40);
+      setScrolled(window.scrollY > 30);
 
-      // ScrollSpy logic
       const sections = ['about', 'career', 'projects', 'certificates', 'contact'];
       const scrollPosition = window.scrollY + 200;
 
@@ -80,116 +78,116 @@ const Navbar = () => {
       data-reveal
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         scrolled || mobileMenuOpen
-          ? 'glass-card py-3.5 shadow-md border-b border-border/80'
-          : 'py-5 bg-transparent'
+          ? 'bg-card/80 backdrop-blur-lg border-b border-border py-3.5 shadow-xs'
+          : 'py-6 bg-transparent'
       }`}
       style={{ '--reveal-delay': '40ms' }}
     >
-      <div className="container mx-auto px-6 sm:px-12 lg:px-20">
+      <div className="container mx-auto px-6 sm:px-10 lg:px-16 max-w-[1440px]">
         <div className="flex items-center justify-between">
-          {/* Logo Branding */}
-          <a href="#" className="flex items-center gap-2 group">
-            <div className="w-9 h-9 rounded-xl bg-gradient-to-tr from-primary to-secondary flex items-center justify-center text-primary-foreground font-extrabold text-sm shadow-md group-hover:scale-105 transition-transform">
-              DR
+          {/* Elegant Logo */}
+          <a href="#" className="flex items-center gap-3 group">
+            <div className="w-10 h-10 rounded-full bg-primary/10 text-primary border border-primary/20 flex items-center justify-center group-hover:scale-105 transition-transform shadow-xs">
+              <Sparkles className="w-5 h-5 stroke-[2.2]" />
             </div>
-            <span className="font-display text-lg font-bold text-foreground group-hover:text-primary transition-colors">
+            <span className="font-display text-xl sm:text-2xl font-bold tracking-tight text-foreground">
               Dicky<span className="text-primary font-mono">.dev</span>
             </span>
           </a>
 
-          {/* Desktop Nav Links & Theme Toggle */}
+          {/* Nav Links in Center */}
           <div className="hidden md:flex items-center gap-8">
-            <nav className="flex items-center gap-6">
+            <nav className="flex items-center gap-7">
               {navLinks.map((link) => {
                 const isActive = activeSection === link.href.replace('#', '');
                 return (
                   <a
                     key={link.name}
                     href={link.href}
-                    className={`relative text-xs uppercase tracking-widest font-mono font-bold transition-all duration-300 ${
+                    className={`font-sans text-xs uppercase tracking-widest font-semibold transition-colors relative py-1 ${
                       isActive
-                        ? 'text-primary font-black'
+                        ? 'text-primary font-bold'
                         : 'text-muted-foreground hover:text-foreground'
                     }`}
                   >
                     {link.name}
-                    <span
-                      className={`absolute -bottom-1.5 left-0 h-0.5 bg-primary rounded-full transition-all duration-300 ${
-                        isActive ? 'w-full' : 'w-0 hover:w-full'
-                      }`}
-                    />
+                    {isActive && (
+                      <span className="absolute bottom-0 left-0 right-0 h-0.5 bg-primary rounded-full" />
+                    )}
                   </a>
                 );
               })}
             </nav>
+          </div>
 
-            <div className="w-px h-5 bg-border" />
-
-            {/* Theme Toggle Button */}
+          {/* Right Action Controls: Theme Toggle + Contact CTA */}
+          <div className="hidden md:flex items-center gap-4">
             <button
               type="button"
               onClick={toggleTheme}
-              className="p-2.5 rounded-xl glass-card border border-border text-foreground hover:text-primary hover:border-primary/40 transition-all duration-300 cursor-pointer hover:scale-105 active:scale-95"
-              aria-label="Toggle dark and light theme"
+              className="w-10 h-10 rounded-full border border-border bg-card hover:bg-muted text-foreground flex items-center justify-center transition-all hover:scale-105 cursor-pointer shadow-xs"
+              aria-label="Toggle theme"
               title={theme === 'dark' ? 'Switch to Light Mode' : 'Switch to Dark Mode'}
             >
               {theme === 'dark' ? (
-                <Sun size={18} className="text-amber-400 animate-[spin_10s_linear_infinite]" />
+                <Sun size={18} className="text-amber-400" />
               ) : (
-                <Moon size={18} className="text-indigo-600" />
+                <Moon size={18} className="text-foreground" />
               )}
             </button>
+
+            <a
+              href="#contact"
+              className="bg-primary text-primary-foreground rounded-full px-6 py-2 text-xs font-bold uppercase tracking-wider shadow-sm hover:shadow-md hover:bg-primary/90 transition-all hover:-translate-y-0.5"
+            >
+              Get Started
+            </a>
           </div>
 
-          {/* Mobile Right Controls (Theme toggle & Hamburger) */}
+          {/* Mobile Controls */}
           <div className="flex items-center gap-3 md:hidden">
             <button
               type="button"
               onClick={toggleTheme}
-              className="p-2 rounded-lg border border-border text-foreground hover:bg-muted transition-colors cursor-pointer"
+              className="w-9 h-9 rounded-full border border-border bg-card text-foreground flex items-center justify-center cursor-pointer shadow-xs"
               aria-label="Toggle theme"
             >
-              {theme === 'dark' ? <Sun size={18} className="text-amber-400" /> : <Moon size={18} className="text-indigo-600" />}
+              {theme === 'dark' ? <Sun size={18} className="text-amber-400" /> : <Moon size={18} />}
             </button>
 
             <button
               type="button"
               onClick={() => setMobileMenuOpen((prev) => !prev)}
-              className="p-2 rounded-lg border border-border text-foreground hover:bg-muted transition-colors cursor-pointer"
-              aria-label="Toggle navigation menu"
-              aria-expanded={mobileMenuOpen}
+              className="w-9 h-9 rounded-full border border-border bg-card text-foreground flex items-center justify-center cursor-pointer shadow-xs"
+              aria-label="Toggle menu"
             >
-              {mobileMenuOpen ? <X size={20} /> : <Menu size={20} />}
+              {mobileMenuOpen ? <X size={18} /> : <Menu size={18} />}
             </button>
           </div>
         </div>
 
         {/* Mobile Navigation Drawer */}
-        <div
-          className={`md:hidden overflow-hidden transition-all duration-300 ease-in-out ${
-            mobileMenuOpen ? 'max-h-80 opacity-100 mt-4' : 'max-h-0 opacity-0'
-          }`}
-        >
-          <div className="rounded-xl border border-border bg-card/95 backdrop-blur-md p-4 flex flex-col gap-2 shadow-xl">
-            {navLinks.map((link) => {
-              const isActive = activeSection === link.href.replace('#', '');
-              return (
-                <a
-                  key={link.name}
-                  href={link.href}
-                  onClick={() => setMobileMenuOpen(false)}
-                  className={`text-xs uppercase tracking-widest font-mono font-bold px-3 py-2.5 rounded-lg transition-colors ${
-                    isActive
-                      ? 'bg-primary/10 text-primary border border-primary/20'
-                      : 'text-muted-foreground hover:text-foreground hover:bg-muted/50'
-                  }`}
-                >
-                  {link.name}
-                </a>
-              );
-            })}
+        {mobileMenuOpen && (
+          <div className="md:hidden mt-4 bg-card/95 backdrop-blur-md border border-border rounded-2xl p-5 shadow-lg flex flex-col gap-2">
+            {navLinks.map((link) => (
+              <a
+                key={link.name}
+                href={link.href}
+                onClick={() => setMobileMenuOpen(false)}
+                className="font-semibold text-sm tracking-wide p-2.5 rounded-xl hover:bg-muted transition-colors text-foreground"
+              >
+                {link.name}
+              </a>
+            ))}
+            <a
+              href="#contact"
+              onClick={() => setMobileMenuOpen(false)}
+              className="bg-primary text-primary-foreground rounded-full text-center px-6 py-2.5 font-bold text-xs uppercase tracking-wider mt-2 shadow-sm"
+            >
+              Get Started
+            </a>
           </div>
-        </div>
+        )}
       </div>
     </header>
   );
