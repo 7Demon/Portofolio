@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-import { Briefcase, GraduationCap, Rocket, Award, Code2, Zap } from 'lucide-react';
+import { GraduationCap, Code2 } from 'lucide-react';
 
 const careers = [
   {
@@ -48,25 +48,27 @@ const CareerItem = ({ item, index }) => {
         {/* Left content */}
         <div
           className={`transition-all duration-700 ${
-            visible ? 'opacity-100 translate-x-0' : isLeft ? 'opacity-0 -translate-x-16' : 'opacity-0 translate-x-16'
+            visible ? 'opacity-100 translate-x-0' : isLeft ? 'opacity-0 -translate-x-12' : 'opacity-0 translate-x-12'
           } ${isLeft ? '' : 'order-3'}`}
         >
           <div
-            className={`glass-card-hover rounded-2xl border border-primary/35 bg-background/45 backdrop-blur-sm p-6 shadow-[0_0_24px_hsl(var(--primary)/0.16)] hover:border-primary/70 hover:-translate-y-1 hover:shadow-[0_0_30px_hsl(var(--primary)/0.3)] transition-all duration-300 ${isLeft ? 'text-right' : 'text-left'}`}
+            className={`glass-card p-6 border border-border hover:border-primary/50 shadow-md hover:shadow-xl transition-all duration-300 ${
+              isLeft ? 'text-right' : 'text-left'
+            }`}
           >
-            <span className="text-xs font-display uppercase tracking-widest text-primary mb-2 block">
+            <span className="text-xs font-mono font-bold uppercase tracking-widest text-primary mb-2 block">
               {item.year}
             </span>
-            <h3 className="font-display text-lg font-semibold text-foreground mb-1">
+            <h3 className="font-display text-lg font-bold text-foreground mb-1">
               {item.title}
             </h3>
-            <p className="text-sm text-secondary font-medium mb-3">{item.company}</p>
-            <p className="text-sm text-muted-foreground mb-4">{item.description}</p>
+            <p className="text-sm text-secondary font-semibold mb-3">{item.company}</p>
+            <p className="text-sm text-muted-foreground leading-relaxed mb-4">{item.description}</p>
             <div className={`flex flex-wrap gap-2 ${isLeft ? 'justify-end' : 'justify-start'}`}>
               {item.tags.map((tag) => (
                 <span
                   key={tag}
-                  className="text-xs px-2.5 py-1 rounded-full bg-primary/10 text-primary border border-primary/20"
+                  className="text-xs font-mono px-2.5 py-1 rounded-md bg-primary/10 text-primary border border-primary/20"
                 >
                   {tag}
                 </span>
@@ -81,11 +83,8 @@ const CareerItem = ({ item, index }) => {
             visible ? 'opacity-100 scale-100' : 'opacity-0 scale-0'
           } ${!isLeft ? 'order-2' : ''}`}
         >
-          <div className="relative w-16 h-16 rounded-full flex items-center justify-center">
-            <div className="absolute inset-0 rounded-full bg-[conic-gradient(from_180deg_at_50%_50%,#a5f3fc_0deg,#22d3ee_120deg,#67e8f9_240deg,#a5f3fc_360deg)] p-[2.5px] shadow-[0_0_20px_rgba(34,211,238,0.7)]">
-              <div className="w-full h-full rounded-full bg-[#040b17]" />
-            </div>
-            <Icon className="relative z-10 w-6 h-6 text-cyan-300" />
+          <div className="relative w-14 h-14 rounded-full flex items-center justify-center bg-card border-2 border-primary shadow-lg">
+            <Icon className="w-6 h-6 text-primary" />
           </div>
         </div>
 
@@ -97,17 +96,14 @@ const CareerItem = ({ item, index }) => {
       <div className="md:hidden flex gap-4 w-full">
         <div className="flex flex-col items-center">
           <div
-            className={`relative z-10 w-14 h-14 rounded-full flex items-center justify-center shrink-0 transition-all duration-500 ${
+            className={`relative z-10 w-12 h-12 rounded-full flex items-center justify-center shrink-0 bg-card border-2 border-primary shadow-md transition-all duration-500 ${
               visible ? 'opacity-100 scale-100' : 'opacity-0 scale-0'
             }`}
           >
-            <div className="absolute inset-0 rounded-full bg-[conic-gradient(from_180deg_at_50%_50%,#a5f3fc_0deg,#22d3ee_120deg,#67e8f9_240deg,#a5f3fc_360deg)] p-0.5 shadow-[0_0_16px_rgba(34,211,238,0.65)]">
-              <div className="w-full h-full rounded-full bg-[#040b17]" />
-            </div>
-            <Icon className="relative z-10 w-5 h-5 text-cyan-300" />
+            <Icon className="w-5 h-5 text-primary" />
           </div>
           {index < careers.length - 1 && (
-            <div className="w-0.5 flex-1 bg-linear-to-b from-primary/40 to-primary/10 mt-2" />
+            <div className="w-0.5 flex-1 bg-gradient-to-b from-primary/50 to-border mt-2" />
           )}
         </div>
         <div
@@ -115,20 +111,20 @@ const CareerItem = ({ item, index }) => {
             visible ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-8'
           }`}
         >
-          <div className="glass-card-hover rounded-2xl border border-primary/35 bg-background/45 backdrop-blur-sm p-5 shadow-[0_0_20px_hsl(var(--primary)/0.14)] transition-all duration-300">
-            <span className="text-xs font-display uppercase tracking-widest text-primary mb-2 block">
+          <div className="glass-card p-5 border border-border hover:border-primary/40 shadow-sm transition-all duration-300">
+            <span className="text-xs font-mono font-bold uppercase tracking-widest text-primary mb-2 block">
               {item.year}
             </span>
-            <h3 className="font-display text-base font-semibold text-foreground mb-1">
+            <h3 className="font-display text-base font-bold text-foreground mb-1">
               {item.title}
             </h3>
             <p className="text-sm text-secondary font-medium mb-2">{item.company}</p>
-            <p className="text-xs text-muted-foreground mb-3">{item.description}</p>
+            <p className="text-xs text-muted-foreground leading-relaxed mb-3">{item.description}</p>
             <div className="flex flex-wrap gap-1.5">
               {item.tags.map((tag) => (
                 <span
                   key={tag}
-                  className="text-xs px-2 py-0.5 rounded-full bg-primary/10 text-primary border border-primary/20"
+                  className="text-[11px] font-mono px-2 py-0.5 rounded-md bg-primary/10 text-primary border border-primary/20"
                 >
                   {tag}
                 </span>
@@ -144,33 +140,26 @@ const CareerItem = ({ item, index }) => {
 const CareerPath = () => {
   return (
     <section id="career" data-reveal style={{ '--reveal-delay': '80ms' }} className="relative py-24 md:py-32 overflow-hidden">
-      <div className="container mx-auto px-6">
+      <div className="container mx-auto px-6 sm:px-12 lg:px-20">
         <div className="max-w-5xl mx-auto">
           {/* Section header */}
           <div data-reveal style={{ '--reveal-delay': '120ms' }} className="text-center mb-16">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-primary/20 bg-primary/5 mb-4">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-primary/20 bg-primary/10 mb-4">
               <span className="text-xs font-mono text-primary font-bold tracking-widest uppercase">02 / Experience</span>
             </div>
             <h2 className="font-display text-4xl md:text-5xl font-bold mb-4">
               <span className="text-foreground">Career &</span>
-              <span className="text-gradient neon-glow ml-2">Education</span>
+              <span className="text-gradient ml-2">Education</span>
             </h2>
-            <div className="w-16 h-1 bg-linear-to-r from-primary to-secondary rounded-full mx-auto mt-4"></div>
+            <div className="w-16 h-1 bg-gradient-to-r from-primary to-secondary rounded-full mx-auto mt-4" />
           </div>
 
           {/* Timeline */}
           <div className="relative">
             {/* Vertical line (desktop) */}
             <div className="hidden md:block absolute left-1/2 top-0 bottom-0 -translate-x-1/2 z-0 pointer-events-none">
-              <div
-                className="h-full w-0.5"
-                style={{
-                  background: 'linear-gradient(180deg, rgba(34,211,238,0.95), rgba(34,211,238,0.7), rgba(56,189,248,0.35))',
-                  boxShadow: '0 0 16px rgba(34,211,238,0.45)',
-                }}
-              />
+              <div className="h-full w-0.5 bg-gradient-to-b from-primary via-primary/50 to-border" />
             </div>
-            <div className="hidden md:block absolute left-1/2 top-0 bottom-0 w-4 -translate-x-1/2 bg-cyan-400/20 blur-lg z-0 pointer-events-none" />
 
             {careers.map((item, index) => (
               <CareerItem key={index} item={item} index={index} />
@@ -178,8 +167,6 @@ const CareerPath = () => {
           </div>
         </div>
       </div>
-      <div className="absolute top-1/3 -left-28 w-72 h-72 rounded-full bg-primary/10 blur-3xl -z-10" />
-      <div className="absolute bottom-0 -right-24 w-72 h-72 rounded-full bg-secondary/10 blur-3xl -z-10" />
     </section>
   );
 };

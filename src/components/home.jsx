@@ -1,55 +1,81 @@
 import { Button } from './ui/Button';
-import { ArrowDown, Github, Twitter, Linkedin, Mail, MapPin, Send, Heart, Award } from 'lucide-react';
+import {
+  ArrowDown,
+  Github,
+  Twitter,
+  Linkedin,
+  Mail,
+  MapPin,
+  Send,
+  Award,
+  ExternalLink,
+  Copy,
+  Check,
+  X,
+  Code,
+  Layers,
+  Sparkles,
+  CheckCircle2,
+} from 'lucide-react';
 import { createElement, useEffect, useState } from 'react';
 import CareerPath from './CareerPath';
-
 
 const projects = [
   {
     name: 'UMSChain',
+    category: 'Web3 & Blockchain',
     tagline: 'Blockchain-Based Diploma Verification',
     image: '/project1.png',
     tags: ['Solidity', 'zkSync Era', 'React.js', 'Ethers.js', 'Hardhat', 'IPFS'],
-    description: 'UMSChain is a web-based decentralized application (dApp) for issuing, storing, and verifying digital academic diplomas. It leverages zkSync Era (Ethereum Layer-2) for immutable on-chain records and IPFS (via Pinata) for decentralized storage, minting each diploma as an ERC-721 NFT.',
+    description:
+      'UMSChain is a web-based decentralized application (dApp) for issuing, storing, and verifying digital academic diplomas. It leverages zkSync Era (Ethereum Layer-2) for immutable on-chain records and IPFS (via Pinata) for decentralized storage, minting each diploma as an ERC-721 NFT.',
     link: 'https://umschain.vercel.app/',
-    github: 'https://github.com/7Demon/ums-chain'
+    github: 'https://github.com/7Demon/ums-chain',
   },
   {
     name: 'Laravel News Portal',
+    category: 'Full-Stack & Web2',
     tagline: 'Full-Stack MVC News Application',
     image: '/project2.png',
     tags: ['PHP', 'Laravel', 'MySQL', 'Bootstrap', 'MVC Architecture'],
-    description: 'A robust web application featuring complete administrative CRUD, dynamic article management, category indexing, secure user authentication, and comments flow, structured strictly under Laravel MVC pattern.',
+    description:
+      'A robust web application featuring complete administrative CRUD, dynamic article management, category indexing, secure user authentication, and comments flow, structured strictly under Laravel MVC pattern.',
     link: 'https://github.com/7Demon/web_news',
-    github: 'https://github.com/7Demon/web_news'
+    github: 'https://github.com/7Demon/web_news',
   },
   {
     name: 'TaskFlow Mobile',
+    category: 'Mobile & Native',
     tagline: 'Java-Based Offline Task Organizer',
     image: '/project3.png',
     tags: ['Java', 'Android SDK', 'SQLite', 'XML Layouts'],
-    description: 'An offline-first Android task manager built with native Java. Utilizes SQLite for robust CRUD operations, categorization, priority sorting, and local notification alerts.',
+    description:
+      'An offline-first Android task manager built with native Java. Utilizes SQLite for robust CRUD operations, categorization, priority sorting, and local notification alerts.',
     link: 'https://github.com/7Demon/capstone',
-    github: 'https://github.com/7Demon/capstone'
+    github: 'https://github.com/7Demon/capstone',
   },
   {
-    name: 'E-commerce',
+    name: 'E-commerce Store',
+    category: 'Full-Stack & Web2',
     tagline: 'Laravel-Based Online Store Platform',
     image: '/project4.png',
     tags: ['Laravel', 'PHP', 'MySQL', 'Blade', 'Bootstrap'],
-    description: 'A web-based e-commerce platform built with Laravel and MySQL. Features product management, shopping cart functionality, order processing, authentication, and responsive UI for seamless online shopping experiences',
+    description:
+      'A web-based e-commerce platform built with Laravel and MySQL. Features product management, shopping cart functionality, order processing, authentication, and responsive UI for seamless online shopping experiences.',
     link: 'https://github.com/7Demon/Ecommerce-Hoodie',
-    github: 'https://github.com/7Demon/Ecommerce-Hoodie'
+    github: 'https://github.com/7Demon/Ecommerce-Hoodie',
   },
   {
     name: 'Bun REST API',
+    category: 'Full-Stack & Web2',
     tagline: 'High-Performance Backend API with Bun & Swagger',
     image: '/project5.png',
     tags: ['Bun', 'JavaScript', 'Swagger', 'REST API', 'MySQL'],
-    description: 'A lightweight and high-performance RESTful API project built using Bun and JavaScript. Integrated Swagger documentation for interactive API testing and endpoint visualization, with structured routing and efficient backend architecture.',
+    description:
+      'A lightweight and high-performance RESTful API project built using Bun and JavaScript. Integrated Swagger documentation for interactive API testing and endpoint visualization, with structured routing and efficient backend architecture.',
     link: 'https://github.com/7Demon/bunProjects',
-    github: 'https://github.com/7Demon/bunProjects'
-  }
+    github: 'https://github.com/7Demon/bunProjects',
+  },
 ];
 
 const certificates = [
@@ -57,50 +83,125 @@ const certificates = [
     name: 'Web Development Bootcamp with HTML CSS PHP MySQL Wordpress',
     image: '/certi1.png',
     tags: ['HTML5', 'CSS3', 'PHP', 'MySQL', 'WordPress'],
-    description: 'A certificate of completion verifying proficiency in building websites using HTML, CSS, PHP backend programming, MySQL database management, and WordPress CMS integration.'
+    description:
+      'A certificate of completion verifying proficiency in building websites using HTML, CSS, PHP backend programming, MySQL database management, and WordPress CMS integration.',
   },
   {
     name: 'Git & GitHub Bootcamp In 2025: The Complete-Practical Guide',
     image: '/certi2.png',
     tags: ['Git', 'GitHub', 'Version Control', 'Workflow'],
-    description: 'Practical training on repository management, branching, merging, conflict resolution, collaborative teamwork, and standard development workflows.'
+    description:
+      'Practical training on repository management, branching, merging, conflict resolution, collaborative teamwork, and standard development workflows.',
   },
   {
     name: 'Build a Modern REST API with PHP 8, from Scratch!',
     image: '/certi3.png',
     tags: ['PHP 8', 'REST API', 'Backend', 'Web Services'],
-    description: 'Hands-on validation of skills in designing, implementing, and securing RESTful Web APIs using native PHP 8 and clean software architecture.'
+    description:
+      'Hands-on validation of skills in designing, implementing, and securing RESTful Web APIs using native PHP 8 and clean software architecture.',
   },
   {
     name: 'Mastering Solidity, the Ethereum Programming Language',
     image: '/certi4.png',
     tags: ['Solidity', 'Ethereum', 'Smart Contracts', 'Web3'],
-    description: 'Advanced credentials covering blockchain architecture, Solidity smart contract programming, security vulnerability mitigation, and decentralized protocol integration.'
+    description:
+      'Advanced credentials covering blockchain architecture, Solidity smart contract programming, security vulnerability mitigation, and decentralized protocol integration.',
   },
   {
     name: 'Complete JAVASCRIPT with HTML5, CSS3 from zero to Expert-2025',
     image: '/certi5.png',
     tags: ['JavaScript', 'ES6+', 'HTML5', 'CSS3', 'DOM API'],
-    description: 'Expert-level training covering advanced core JavaScript features, asynchronous operations, interactive DOM structures, and clean coding concepts.'
+    description:
+      'Expert-level training covering advanced core JavaScript features, asynchronous operations, interactive DOM structures, and clean coding concepts.',
   },
   {
     name: 'Java OOP: Object Oriented Programming with Exercises - 2025',
     image: '/certi6.png',
     tags: ['Java', 'OOP', 'Software Engineering', 'Algorithms'],
-    description: 'Deep dive into Object-Oriented Programming (OOP) paradigms in Java, including encapsulation, inheritance, polymorphism, abstraction, and unit exercises.'
+    description:
+      'Deep dive into Object-Oriented Programming (OOP) paradigms in Java, including encapsulation, inheritance, polymorphism, abstraction, and unit exercises.',
   },
   {
     name: 'International Conference on SIML 2025',
     image: '/certi7.png',
     tags: ['Artificial Intelligence', 'IoT', 'Machine Learning', 'Smart Computing'],
-    description: 'Attended the International Conference on Smart Computing, IoT and Machine Learning (SIML 2025) with focus on "Harnessing Artificial Intelligence and Smart Technologies to Build Sustainable, Inclusive, and Resilient Communities".'
-  }
+    description:
+      'Attended the International Conference on Smart Computing, IoT and Machine Learning (SIML 2025) with focus on "Harnessing Artificial Intelligence and Smart Technologies to Build Sustainable, Inclusive, and Resilient Communities".',
+  },
+];
+
+const skillCategories = [
+  {
+    id: 'all',
+    name: 'All Skills',
+    skills: [
+      { name: 'JavaScript / ES6+', category: 'Web2 & Frontend', level: 'Advanced' },
+      { name: 'React.js', category: 'Web2 & Frontend', level: 'Advanced' },
+      { name: 'Tailwind CSS / Bootstrap', category: 'Web2 & Frontend', level: 'Advanced' },
+      { name: 'PHP & Laravel', category: 'Backend & Database', level: 'Advanced' },
+      { name: 'Python', category: 'Backend & Database', level: 'Intermediate' },
+      { name: 'MySQL & SQLite', category: 'Backend & Database', level: 'Advanced' },
+      { name: 'Solidity (Smart Contracts)', category: 'Web3 & Blockchain', level: 'Advanced' },
+      { name: 'zkSync Era & Hardhat', category: 'Web3 & Blockchain', level: 'Advanced' },
+      { name: 'Ethers.js & IPFS', category: 'Web3 & Blockchain', level: 'Intermediate' },
+      { name: 'Git & GitHub Workflow', category: 'Tools & DevOps', level: 'Advanced' },
+      { name: 'Bun & REST APIs', category: 'Backend & Database', level: 'Intermediate' },
+      { name: 'Android Java SDK', category: 'Mobile & Native', level: 'Intermediate' },
+    ],
+  },
+  {
+    id: 'web2',
+    name: 'Web2 & Frontend',
+    skills: [
+      { name: 'JavaScript / ES6+', category: 'Web2 & Frontend', level: 'Advanced' },
+      { name: 'React.js', category: 'Web2 & Frontend', level: 'Advanced' },
+      { name: 'Tailwind CSS & Bootstrap', category: 'Web2 & Frontend', level: 'Advanced' },
+      { name: 'HTML5 & CSS3 Architecture', category: 'Web2 & Frontend', level: 'Advanced' },
+    ],
+  },
+  {
+    id: 'backend',
+    name: 'Backend & Database',
+    skills: [
+      { name: 'PHP & Laravel (MVC)', category: 'Backend & Database', level: 'Advanced' },
+      { name: 'MySQL & Database Design', category: 'Backend & Database', level: 'Advanced' },
+      { name: 'Bun & Node Runtime', category: 'Backend & Database', level: 'Intermediate' },
+      { name: 'Python Backend', category: 'Backend & Database', level: 'Intermediate' },
+      { name: 'RESTful API & Swagger', category: 'Backend & Database', level: 'Advanced' },
+    ],
+  },
+  {
+    id: 'web3',
+    name: 'Web3 & Blockchain',
+    skills: [
+      { name: 'Solidity (ERC-721 / Smart Contracts)', category: 'Web3 & Blockchain', level: 'Advanced' },
+      { name: 'zkSync Era (Ethereum L2)', category: 'Web3 & Blockchain', level: 'Advanced' },
+      { name: 'Hardhat & Smart Contract Testing', category: 'Web3 & Blockchain', level: 'Advanced' },
+      { name: 'Ethers.js Integration', category: 'Web3 & Blockchain', level: 'Intermediate' },
+      { name: 'IPFS Decentralized Storage', category: 'Web3 & Blockchain', level: 'Intermediate' },
+    ],
+  },
+  {
+    id: 'tools',
+    name: 'Tools & Platforms',
+    skills: [
+      { name: 'Git & GitHub Collaborative Flow', category: 'Tools & DevOps', level: 'Advanced' },
+      { name: 'WordPress CMS', category: 'Tools & DevOps', level: 'Intermediate' },
+      { name: 'Android SDK (Java)', category: 'Tools & DevOps', level: 'Intermediate' },
+      { name: 'Vite & Modern Bundlers', category: 'Tools & DevOps', level: 'Advanced' },
+    ],
+  },
 ];
 
 const Home = () => {
+  const [activeSkillTab, setActiveSkillTab] = useState('all');
+  const [activeProjectCategory, setActiveProjectCategory] = useState('All');
+  const [selectedCert, setSelectedCert] = useState(null);
+  const [copiedEmail, setCopiedEmail] = useState(false);
+
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [formError, setFormError] = useState('');
-  const [selectedCert, setSelectedCert] = useState(null);
+  const [formSuccess, setFormSuccess] = useState(false);
 
   useEffect(() => {
     const handleKeyDown = (e) => {
@@ -110,145 +211,19 @@ const Home = () => {
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, []);
 
-  useEffect(() => {
-    const scrollContainer = document.querySelector('.scrollbar-slot');
-    if (!scrollContainer) return;
+  const handleCopyEmail = () => {
+    navigator.clipboard.writeText('dickyramadhan0x7@gmail.com');
+    setCopiedEmail(true);
+    setTimeout(() => setCopiedEmail(false), 2500);
+  };
 
-    let cardsData = [];
-    const updateCache = () => {
-      const cards = scrollContainer.querySelectorAll('.skill-card');
-      cardsData = Array.from(cards).map((card) => {
-        let offsetTop = card.offsetTop;
-        let parent = card.offsetParent;
-        while (parent && parent !== scrollContainer) {
-          offsetTop += parent.offsetTop;
-          parent = parent.offsetParent;
-        }
-        return {
-          element: card,
-          parentEl: card.parentElement,
-          offsetTop: offsetTop,
-          height: card.offsetHeight
-        };
-      });
-    };
+  const filteredProjects =
+    activeProjectCategory === 'All'
+      ? projects
+      : projects.filter((p) => p.category === activeProjectCategory);
 
-    updateCache();
-    window.addEventListener('resize', updateCache);
-
-    let ticking = false;
-
-    const handleScroll = () => {
-      if (!ticking) {
-        window.requestAnimationFrame(() => {
-          const scrollTop = scrollContainer.scrollTop;
-          const containerHeight = scrollContainer.clientHeight;
-          const containerCenter = scrollTop + containerHeight / 2;
-
-          cardsData.forEach((card) => {
-            const cardCenter = card.offsetTop + card.height / 2;
-            const distance = Math.abs(cardCenter - containerCenter);
-            const maxDistance = containerHeight / 2;
-            const ratio = Math.max(0, 1 - distance / maxDistance);
-
-            // Scale and opacity based on distance from center
-            const scale = 0.8 + ratio * 0.3;
-            const opacity = 0.4 + ratio * 0.6;
-
-            card.element.style.transform = `scale(${scale})`;
-            card.element.style.opacity = opacity;
-
-            // Highlight center item
-            if (ratio > 0.9) {
-              card.parentEl.classList.add('center-item');
-            } else {
-              card.parentEl.classList.remove('center-item');
-            }
-          });
-          ticking = false;
-        });
-        ticking = true;
-      }
-    };
-
-    scrollContainer.addEventListener('scroll', handleScroll);
-    handleScroll(); // Initial call
-
-    return () => {
-      scrollContainer.removeEventListener('scroll', handleScroll);
-      window.removeEventListener('resize', updateCache);
-    };
-  }, []);
-
-  useEffect(() => {
-    const scrollContainerCert = document.querySelector('.scrollbar-slot-horizontal');
-    if (!scrollContainerCert) return;
-
-    let cardsData = [];
-    const updateCache = () => {
-      const cards = scrollContainerCert.querySelectorAll('.cert-card');
-      cardsData = Array.from(cards).map((card) => {
-        let offsetLeft = card.offsetLeft;
-        let parent = card.offsetParent;
-        while (parent && parent !== scrollContainerCert) {
-          offsetLeft += parent.offsetLeft;
-          parent = parent.offsetParent;
-        }
-        return {
-          element: card,
-          parentEl: card.parentElement,
-          offsetLeft: offsetLeft,
-          width: card.offsetWidth
-        };
-      });
-    };
-
-    updateCache();
-    window.addEventListener('resize', updateCache);
-
-    let ticking = false;
-
-    const handleScrollCert = () => {
-      if (!ticking) {
-        window.requestAnimationFrame(() => {
-          const scrollLeft = scrollContainerCert.scrollLeft;
-          const containerWidth = scrollContainerCert.clientWidth;
-          const containerCenter = scrollLeft + containerWidth / 2;
-
-          cardsData.forEach((card) => {
-            const cardCenter = card.offsetLeft + card.width / 2;
-            const distance = Math.abs(cardCenter - containerCenter);
-            const maxDistance = containerWidth / 2;
-            const ratio = Math.max(0, 1 - distance / maxDistance);
-
-            // Scale and opacity based on distance from center
-            const scale = 0.85 + ratio * 0.15;
-            const opacity = 0.4 + ratio * 0.6;
-
-            card.element.style.transform = `scale(${scale})`;
-            card.element.style.opacity = opacity;
-
-            // Highlight center item
-            if (ratio > 0.95) {
-              card.parentEl.classList.add('center-item-horizontal');
-            } else {
-              card.parentEl.classList.remove('center-item-horizontal');
-            }
-          });
-          ticking = false;
-        });
-        ticking = true;
-      }
-    };
-
-    scrollContainerCert.addEventListener('scroll', handleScrollCert);
-    handleScrollCert(); // Initial call
-
-    return () => {
-      scrollContainerCert.removeEventListener('scroll', handleScrollCert);
-      window.removeEventListener('resize', updateCache);
-    };
-  }, []);
+  const currentSkillList =
+    skillCategories.find((cat) => cat.id === activeSkillTab)?.skills || [];
 
   const handleContactSubmit = (event) => {
     const form = event.currentTarget;
@@ -267,7 +242,7 @@ const Home = () => {
 
     if (!name || !email || !message) {
       event.preventDefault();
-      setFormError('Semua field wajib diisi.');
+      setFormError('Semua kolom wajib diisi.');
       return;
     }
 
@@ -283,296 +258,301 @@ const Home = () => {
       return;
     }
 
-    const lastSubmit = Number(localStorage.getItem('contact_last_submit_at') || 0);
-    const now = Date.now();
-    const cooldownMs = 60 * 1000;
-
-    if (now - lastSubmit < cooldownMs) {
-      event.preventDefault();
-      setFormError('Tunggu 60 detik sebelum kirim pesan lagi.');
-      return;
-    }
-
-    localStorage.setItem('contact_last_submit_at', String(now));
     setFormError('');
     setIsSubmitting(true);
+    setFormSuccess(true);
   };
 
   return (
     <>
-      {/* hero section*/}
-      <section data-reveal style={{ '--reveal-delay': '80ms' }} className="relative min-h-screen flex items-center justify-center overflow-hidden">
-        <div className="container mx-auto px-4 sm:px-30 lg:px-40 py-24 md:py-28 lg:py-30 relative z-10">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-12 items-center">
-
+      {/* Hero Section */}
+      <section
+        id="home"
+        data-reveal
+        style={{ '--reveal-delay': '80ms' }}
+        className="relative min-h-[92vh] flex items-center justify-center pt-24 pb-16 overflow-hidden"
+      >
+        <div className="container mx-auto px-6 sm:px-12 lg:px-20 relative z-10">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
             {/* Left Content */}
-            <div className="text-center lg:text-left">
-              {/* Status badge */}
-              <div className="animate-fade-up opacity-0 delay-100">
-                <div className="inline-flex items-center gap-2 glass-card px-4 py-1 mb-8">
-                  <span className="w-2 h-2 rounded-full bg-primary animate-pulse" />
-                  <span className="text-sm text-muted-foreground">Available for Web2 and Web3 Projects</span>
+            <div className="lg:col-span-7 text-center lg:text-left">
+              {/* Availability Badge */}
+              <div className="animate-fade-up opacity-0 delay-100 inline-block mb-6">
+                <div className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full glass-card border border-primary/30 text-xs font-mono font-semibold text-foreground shadow-sm">
+                  <span className="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse" />
+                  <span>Available for Web2 & Web3 Projects</span>
                 </div>
               </div>
-              {/* Engineering the Future of Web2 & Web3 */}
-              {/* Main heading */}
-              <h1 className="font-display text-3xl sm:text-3xl md:text-4xl lg:text-5xl font-bold leading-tight mb-6 animate-fade-up opacity-0 delay-200">
-                <span className="text-foreground">Engineering the</span>
+
+              {/* Main Heading */}
+              <h1 className="font-display text-4xl sm:text-5xl lg:text-6xl font-extrabold leading-[1.1] mb-6 animate-fade-up opacity-0 delay-200">
+                <span className="text-foreground">Dicky Ramadhan</span>
                 <br />
-                <span className="text-gradient neon-glow">Future of Web2 & Web3</span>
-                {/* <br />
-              <span className="text-foreground">Future</span> */}
+                <span className="text-gradient">Full-Stack & Web3 Engineer</span>
               </h1>
 
-              {/* Subtitle */}
-              <p className="text-base sm:text-lg md:text-lg text-muted-foreground max-w-2xl mx-auto lg:mx-0 mb-8 md:mb-10 animate-fade-up opacity-0 delay-300">
-                Nice to connect with you all <br />
-                I am Dicky Ramadhan, a software developer with experienced in Web2 and Web3 development,
-                <span className="hidden sm:inline"><br /></span>
-                {' '}including smart contract integration and decentralized features.
+              {/* Subtitle / Pitch */}
+              <p className="text-base sm:text-lg text-muted-foreground max-w-2xl mx-auto lg:mx-0 mb-8 leading-relaxed animate-fade-up opacity-0 delay-300">
+                Informatics Graduate from Universitas Muhammadiyah Surakarta specializing in building modern web applications, robust full-stack MVC backends, and smart contracts for decentralized ecosystems.
               </p>
 
               {/* CTA Buttons */}
-              <div className="flex flex-col sm:flex-row items-center lg:items-start justify-center lg:justify-start gap-4 mb-10 md:mb-12 animate-fade-up opacity-0 delay-400">
-                <Button size="lg" asChild>
-                  <a href="#contact">Contact Me</a>
+              <div className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 mb-10 animate-fade-up opacity-0 delay-400">
+                <Button size="lg" asChild className="w-full sm:w-auto shadow-md">
+                  <a href="#contact" className="gap-2">
+                    <Mail size={18} />
+                    Get In Touch
+                  </a>
                 </Button>
-                <Button variant="outline" size="lg" asChild>
-                  <a href="#projects">View Works</a>
+                <Button variant="outline" size="lg" asChild className="w-full sm:w-auto">
+                  <a href="#projects" className="gap-2">
+                    <Code size={18} />
+                    View Featured Works
+                  </a>
                 </Button>
               </div>
 
-              {/* Social links */}
-              <div className="flex flex-wrap items-center justify-center lg:justify-start gap-4 animate-fade-up opacity-0 delay-500">
+              {/* Social Links & Email Copy */}
+              <div className="flex flex-wrap items-center justify-center lg:justify-start gap-3 animate-fade-up opacity-0 delay-500">
                 {[
-                  { icon: Github, href: 'https://github.com/7Demon' },
-                  { icon: Twitter, href: 'https://x.com/oppp354' },
-                  { icon: Linkedin, href: 'https://www.linkedin.com/in/dicky-ramadhan-b2b591361/' },
-                ].map(({ icon, href }, index) => (
+                  { icon: Github, href: 'https://github.com/7Demon', label: 'GitHub' },
+                  { icon: Twitter, href: 'https://x.com/oppp354', label: 'Twitter' },
+                  { icon: Linkedin, href: 'https://www.linkedin.com/in/dicky-ramadhan-b2b591361/', label: 'LinkedIn' },
+                ].map(({ icon, href, label }) => (
                   <a
-                    key={index}
+                    key={label}
                     href={href}
-                    className="border rounded-xl w-12 h-12 glass-card-hover flex items-center justify-center text-muted-foreground hover:text-primary transition-all hover:scale-110"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label={label}
+                    className="w-11 h-11 rounded-xl glass-card flex items-center justify-center text-muted-foreground hover:text-primary hover:border-primary/40 transition-all hover:scale-105 active:scale-95"
                   >
                     {createElement(icon, { size: 20 })}
                   </a>
                 ))}
+
+                <button
+                  type="button"
+                  onClick={handleCopyEmail}
+                  className="h-11 px-4 rounded-xl glass-card flex items-center gap-2 text-xs font-mono font-bold text-muted-foreground hover:text-primary hover:border-primary/40 transition-all hover:scale-105 cursor-pointer"
+                  title="Copy Email Address"
+                >
+                  {copiedEmail ? <Check size={16} className="text-emerald-500" /> : <Copy size={16} />}
+                  <span>{copiedEmail ? 'Email Copied!' : 'dickyramadhan0x7@gmail.com'}</span>
+                </button>
               </div>
             </div>
 
-            {/* Right Hero Content - Interactive Avatar Showcase */}
-            <div className="relative flex justify-center items-center animate-fade-up opacity-0 delay-300 h-80 sm:h-96 md:h-[450px] lg:h-[500px]">
-              {/* Background glowing gradient orb */}
-              <div className="absolute w-72 h-72 sm:w-96 sm:h-96 bg-linear-to-br from-primary/30 to-secondary/30 rounded-full blur-3xl animate-pulse-slow" />
+            {/* Right Interactive Avatar Showcase */}
+            <div className="lg:col-span-5 flex justify-center items-center animate-fade-up opacity-0 delay-300">
+              <div className="relative w-72 h-72 sm:w-88 sm:h-88 lg:w-96 lg:h-96 flex items-center justify-center group">
+                {/* Rotating Tech Accent Rings */}
+                <div className="absolute inset-0 rounded-full border border-dashed border-primary/30 animate-[spin_40s_linear_infinite]" />
+                <div className="absolute inset-4 rounded-full border border-secondary/30 animate-[spin_25s_linear_infinite_reverse]" />
 
-              <div className="relative w-72 h-72 sm:w-80 sm:h-80 md:w-96 md:h-96 flex items-center justify-center">
-                {/* Outer rotating dashed tech-ring */}
-                <div className="absolute inset-0 rounded-full border border-dashed border-primary/40 animate-[spin_40s_linear_infinite]" />
-
-                {/* Middle glowing solid ring */}
-                <div className="absolute inset-4 rounded-full border-2 border-secondary/35 animate-[spin_25s_linear_infinite_reverse] shadow-[0_0_20px_rgba(139,92,246,0.15)]" />
-
-                {/* Main Avatar Frame */}
-                <div className="absolute inset-8 rounded-full overflow-hidden border-2 border-primary/60 shadow-[0_0_40px_hsl(175_80%_50%/_0.3)] bg-slate-950/80 group z-10">
+                {/* Main Avatar Card */}
+                <div className="absolute inset-7 rounded-full overflow-hidden border-2 border-primary/60 shadow-2xl bg-card transition-transform duration-500 group-hover:scale-105">
                   <img
                     src="/developer_avatar.png"
-                    alt="Dicky Ramadhan Developer Avatar"
-                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                    alt="Dicky Ramadhan Avatar"
+                    className="w-full h-full object-cover"
                   />
                 </div>
 
-                {/* Floating Tech Badge 1 - Solidity */}
-                <div className="absolute -top-1 -right-4 glass-card px-4 py-2 border border-primary/30 rounded-xl flex items-center gap-2 animate-bounce shadow-lg z-20" style={{ animationDuration: '3.5s' }}>
-                  <span className="flex h-2 w-2 rounded-full bg-primary animate-ping" />
-                  <span className="text-xs font-mono text-foreground font-bold">Web2 & Web3</span>
+                {/* Floating Stat Badge 1 */}
+                <div className="absolute -top-2 -right-2 glass-card px-3.5 py-2 border border-primary/30 rounded-xl flex items-center gap-2 shadow-lg z-20">
+                  <Sparkles size={16} className="text-primary animate-bounce" />
+                  <span className="text-xs font-mono font-bold text-foreground">Web2 & Web3</span>
                 </div>
 
-                {/* Floating Tech Badge 2 - Graduate */}
-                <div className="absolute -bottom-1 -left-4 glass-card px-4 py-2 border border-secondary/35 rounded-xl flex items-center gap-2 animate-bounce shadow-lg z-20" style={{ animationDuration: '4.5s' }}>
-                  <span className="flex h-2 w-2 rounded-full bg-secondary animate-ping" />
-                  <span className="text-xs font-mono text-foreground font-bold">Informatics Graduate</span>
+                {/* Floating Stat Badge 2 */}
+                <div className="absolute -bottom-2 -left-2 glass-card px-3.5 py-2 border border-secondary/30 rounded-xl flex items-center gap-2 shadow-lg z-20">
+                  <Award size={16} className="text-secondary" />
+                  <span className="text-xs font-mono font-bold text-foreground">7+ Certifications</span>
                 </div>
               </div>
             </div>
           </div>
 
-          {/* Scroll indicator */}
-          <div className="hidden md:block absolute bottom-8 md:bottom-10 left-1/2 -translate-x-1/2 animate-bounce">
-            <a href="#about" className="text-muted-foreground hover:text-primary transition-colors">
-              <ArrowDown size={24} />
+          {/* Scroll Down Arrow */}
+          <div className="hidden md:block absolute bottom-4 left-1/2 -translate-x-1/2 animate-bounce">
+            <a href="#about" aria-label="Scroll to About Section" className="text-muted-foreground hover:text-primary transition-colors">
+              <ArrowDown size={22} />
             </a>
           </div>
         </div>
       </section>
 
-      {/* About Section */}
-      <section id="about" data-reveal style={{ '--reveal-delay': '100ms' }} className="relative py-20 md:py-32 overflow-hidden">
-        <div className="container mx-auto px-4 md:px-6">
+      {/* About & Interactive Skills Section */}
+      <section id="about" data-reveal style={{ '--reveal-delay': '100ms' }} className="relative py-24 overflow-hidden">
+        <div className="container mx-auto px-6 sm:px-12 lg:px-20">
           <div className="max-w-6xl mx-auto">
-            {/* Section Title */}
-            <div className="mb-12 md:mb-16 text-center animate-fade-up opacity-0">
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-primary/20 bg-primary/5 mb-4">
+            {/* Section Header */}
+            <div className="mb-14 text-center animate-fade-up opacity-0">
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-primary/20 bg-primary/10 mb-4">
                 <span className="text-xs font-mono text-primary font-bold tracking-widest uppercase">01 / Profile</span>
               </div>
-              <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4">
+              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-4">
                 <span className="text-foreground">About</span>
-                <span className="text-gradient neon-glow ml-2">Me</span>
+                <span className="text-gradient ml-2">Me</span>
               </h2>
-              <div className="w-16 h-1 bg-linear-to-r from-primary to-secondary rounded-full mx-auto mt-4"></div>
+              <div className="w-16 h-1 bg-gradient-to-r from-primary to-secondary rounded-full mx-auto" />
             </div>
 
             {/* Content Grid */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12 items-center mb-12">
-              {/* Left - Text Content */}
-              <div className="space-y-6 animate-fade-up opacity-0 delay-200">
-                <p className="text-muted-foreground text-justify md:text-justify md:text-lg leading-relaxed">
-                  I am a recent Informatics graduate from Universitas Muhammadiyah Surakarta 2022-2026 with a passion for software development and emerging technologies.
-                </p>
-
-                <p className="text-muted-foreground text-justify md:text-justify md:text-lg leading-relaxed">
-                  I’m a developer working across Web2 and Web3 environments, with experience building web applications and integrating blockchain technologies. My interest in software development gradually expanded into exploring decentralized systems and smart contracts.
-                </p>
-
-                <p className="text-muted-foreground text-justify md:text-justify md:text-lg leading-relaxed">
-                  I focus on developing efficient, maintainable, and user-friendly applications.
-                  My work includes building modern web platforms, implementing backend systems,
-                  and integrating blockchain features where needed.
-                  Outside of development, I enjoy exploring emerging technologies and continuously improving
-                  my technical skills to stay adaptable in the rapidly evolving tech landscape.
-                </p>
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
+              {/* Left Bio Card */}
+              <div className="lg:col-span-6 space-y-5 animate-fade-up opacity-0 delay-200">
+                <div className="glass-card p-6 sm:p-8 space-y-4 border border-border">
+                  <h3 className="font-display text-xl font-bold text-foreground flex items-center gap-2">
+                    <Layers className="text-primary" size={22} />
+                    Software Developer & Informatics Graduate
+                  </h3>
+                  <p className="text-muted-foreground leading-relaxed text-sm sm:text-base">
+                    I am a recent Informatics graduate from Universitas Muhammadiyah Surakarta (2022-2026) with hands-on experience across full-stack web development and blockchain engineering.
+                  </p>
+                  <p className="text-muted-foreground leading-relaxed text-sm sm:text-base">
+                    My core expertise includes building responsive web interfaces, designing MVC web portals with PHP & Laravel, creating high-performance REST APIs, and implementing smart contracts on Layer-2 Ethereum solutions (zkSync Era).
+                  </p>
+                  <div className="pt-2 flex flex-wrap gap-2">
+                    {['Full-Stack MVC', 'Smart Contracts (Solidity)', 'RESTful APIs', 'zkSync Era L2', 'Responsive UI'].map((highlight) => (
+                      <span key={highlight} className="inline-flex items-center gap-1.5 text-xs font-mono px-3 py-1 rounded-full bg-primary/10 text-primary border border-primary/20">
+                        <CheckCircle2 size={12} />
+                        {highlight}
+                      </span>
+                    ))}
+                  </div>
+                </div>
               </div>
 
-              {/* Right - Skills Carousel */}
-              <div className="animate-fade-up opacity-0 delay-300">
-                <div className="relative">
-                  {/* Overlay untuk efek slot machine */}
-                  <div className="absolute inset-0 pointer-events-none z-20">
-                    <div className="absolute top-0 left-0 right-0 h-12 bg-linear-to-b from-background to-transparent" />
-                    <div className="absolute bottom-0 left-0 right-0 h-12 bg-linear-to-t from-background to-transparent" />
-                    {/* Center highlight glow */}
-                    <div className="absolute top-1/2 -translate-y-1/2 left-0 right-0 h-32 bg-linear-to-b from-primary/20 via-primary/30 to-primary/20 blur-2xl" />
+              {/* Right Interactive Skill Categories */}
+              <div className="lg:col-span-6 animate-fade-up opacity-0 delay-300">
+                <div className="glass-card p-6 sm:p-8 border border-border">
+                  <h3 className="font-display text-xl font-bold text-foreground mb-6">
+                    Technical Stack & Capabilities
+                  </h3>
+
+                  {/* Skill Category Tabs */}
+                  <div className="flex flex-wrap gap-2 mb-6 pb-4 border-b border-border">
+                    {skillCategories.map((cat) => (
+                      <button
+                        key={cat.id}
+                        onClick={() => setActiveSkillTab(cat.id)}
+                        className={`text-xs font-mono px-3.5 py-1.5 rounded-lg transition-all cursor-pointer ${
+                          activeSkillTab === cat.id
+                            ? 'bg-primary text-primary-foreground font-bold shadow-sm'
+                            : 'bg-muted/50 text-muted-foreground hover:text-foreground hover:bg-muted'
+                        }`}
+                      >
+                        {cat.name}
+                      </button>
+                    ))}
                   </div>
 
-                  {/* Scrollable container */}
-                  <div className="h-80 sm:h-96 overflow-y-auto snap-y snap-mandatory pt-24 sm:pt-32 pb-24 sm:pb-32 scrollbar-slot scroll-smooth relative">
-                    <div className="flex flex-col">
-                      {[
-                        {
-                          title: 'Programming Languages',
-                          skills: 'JavaScript, Python, PHP, Solidity'
-                        },
-                        {
-                          title: 'Frontend Technologies',
-                          skills: 'React (Library), Tailwind CSS (Framework), Bootstrap (Framework)'
-                        },
-                        {
-                          title: 'Backend Technologies',
-                          skills: 'Python, Laravel (PHP Framework)'
-                        },
-                        {
-                          title: 'Blockchain Development',
-                          skills: 'Solidity (Smart Contract Language), Hardhat (Development Framework), Ethers.js (Library)'
-                        },
-                        {
-                          title: 'Tools & Platforms',
-                          skills: 'Git (Version Control), WordPress (CMS), SAP (Enterprise System)'
-                        }
-                      ].map((skill, index) => (
-                        <div
-                          key={index}
-                          className="snap-center shrink-0 h-28 sm:h-32 px-3 sm:px-6 lg:px-9 py-2 sm:py-3 flex items-center justify-center transition-all duration-500 ease-out transform"
-                          style={{
-                            scrollSnapAlign: 'center',
-                            scrollSnapStop: 'always'
-                          }}
-                        >
-                          <div className="skill-card w-full glass-card p-4 sm:p-6 rounded-xl border border-primary/20 transition-all duration-500 hover:border-primary/50"
-                            data-skill-index={index}
-                          >
-                            <h3 className="text-foreground font-bold text-base sm:text-lg mb-2 transition-colors duration-500">
-                              {skill.title}
-                            </h3>
-                            <p className="text-muted-foreground text-sm transition-colors duration-500">{skill.skills}</p>
-                          </div>
+                  {/* Skills Grid */}
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 max-h-[360px] overflow-y-auto pr-1">
+                    {currentSkillList.map((skill) => (
+                      <div
+                        key={skill.name}
+                        className="p-3.5 rounded-xl border border-border/80 bg-background/60 hover:border-primary/40 transition-all duration-300 flex flex-col justify-between"
+                      >
+                        <span className="text-sm font-semibold text-foreground mb-1">{skill.name}</span>
+                        <div className="flex items-center justify-between text-[11px] font-mono">
+                          <span className="text-muted-foreground">{skill.category}</span>
+                          <span className="text-primary font-bold">{skill.level}</span>
                         </div>
-                      ))}
-                    </div>
+                      </div>
+                    ))}
                   </div>
                 </div>
               </div>
             </div>
-
           </div>
         </div>
-        {/* Background decoration */}
-        <div className="absolute top-1/2 -right-40 w-80 h-80 bg-secondary/10 rounded-full blur-3xl -z-10" />
-        <div className="absolute bottom-0 -left-40 w-80 h-80 bg-primary/10 rounded-full blur-3xl -z-10" />
       </section>
 
-      {/* career path */}
-      <section id='careerpath' data-reveal style={{ '--reveal-delay': '120ms' }}>
+      {/* Career Section Component */}
+      <section id="careerpath" data-reveal style={{ '--reveal-delay': '120ms' }}>
         <CareerPath />
       </section>
 
-      {/* project section */}
-      <section id="projects" data-reveal style={{ '--reveal-delay': '140ms' }} className='relative py-20 md:py-28 overflow-hidden'>
-        <div className='container mx-auto px-4 md:px-6'>
-          <div className='content-center mx-auto'>
-            {/* title */}
-            <div className="mb-12 md:mb-16 text-center animate-fade-up opacity-0">
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-primary/20 bg-primary/5 mb-4">
+      {/* Featured Projects Section */}
+      <section id="projects" data-reveal style={{ '--reveal-delay': '140ms' }} className="relative py-24 overflow-hidden">
+        <div className="container mx-auto px-6 sm:px-12 lg:px-20">
+          <div className="max-w-6xl mx-auto">
+            {/* Section Header */}
+            <div className="mb-12 text-center animate-fade-up opacity-0">
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-primary/20 bg-primary/10 mb-4">
                 <span className="text-xs font-mono text-primary font-bold tracking-widest uppercase">03 / Projects</span>
               </div>
-              <h2 className="font-display text-4xl md:text-5xl font-bold mb-4">
+              <h2 className="font-display text-4xl sm:text-5xl font-bold mb-4">
                 <span className="text-foreground">Featured</span>
-                <span className="text-gradient neon-glow ml-2">Creations</span>
+                <span className="text-gradient ml-2">Creations</span>
               </h2>
-              <div className="w-16 h-1 bg-linear-to-r from-primary to-secondary rounded-full mx-auto mt-4"></div>
+              <div className="w-16 h-1 bg-gradient-to-r from-primary to-secondary rounded-full mx-auto" />
             </div>
-            {/* content */}
-            <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 animate-fade-up opacity-0 delay-200 mx-auto max-w-6xl px-4'>
-              {projects.map((project, index) => (
+
+            {/* Category Filter Buttons */}
+            <div className="flex flex-wrap items-center justify-center gap-2 mb-12 animate-fade-up opacity-0 delay-100">
+              {['All', 'Web3 & Blockchain', 'Full-Stack & Web2', 'Mobile & Native'].map((cat) => (
+                <button
+                  key={cat}
+                  onClick={() => setActiveProjectCategory(cat)}
+                  className={`text-xs font-mono px-4 py-2 rounded-xl transition-all cursor-pointer ${
+                    activeProjectCategory === cat
+                      ? 'bg-primary text-primary-foreground font-bold shadow-md scale-105'
+                      : 'glass-card text-muted-foreground hover:text-foreground hover:border-primary/40'
+                  }`}
+                >
+                  {cat}
+                </button>
+              ))}
+            </div>
+
+            {/* Project Cards Grid */}
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 animate-fade-up opacity-0 delay-200">
+              {filteredProjects.map((project) => (
                 <div
                   key={project.name}
-                  data-reveal
-                  style={{ '--reveal-delay': `${index * 100}ms` }}
-                  className='glass-card flex flex-col justify-between overflow-hidden border border-primary/25 hover:border-primary/50 transition-all duration-300 hover:-translate-y-2'
+                  className="glass-card flex flex-col justify-between overflow-hidden border border-border hover:border-primary/50 transition-all duration-300 hover:-translate-y-2 group"
                 >
-                  <div className='relative w-full aspect-video overflow-hidden border-b border-primary/10 bg-black/40'>
+                  {/* Image Preview */}
+                  <div className="relative w-full aspect-video overflow-hidden border-b border-border bg-muted">
                     <img
                       src={project.image}
                       alt={project.name}
-                      className='w-full h-full object-cover transition-transform duration-500 hover:scale-105'
+                      className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
                     />
-                    <div className='absolute top-3 right-3 bg-slate-950/80 backdrop-blur-md px-3 py-1 rounded-full border border-primary/20 z-10'>
-                      <span className="text-[10px] font-mono text-primary font-bold tracking-wider uppercase">Project {index + 1}</span>
+                    <div className="absolute top-3 right-3 bg-card/90 backdrop-blur-md px-3 py-1 rounded-full border border-border z-10">
+                      <span className="text-[10px] font-mono text-primary font-bold uppercase">{project.category}</span>
                     </div>
                   </div>
 
-                  <div className='p-6 flex-1 flex flex-col justify-between'>
+                  {/* Card Info */}
+                  <div className="p-6 flex-1 flex flex-col justify-between space-y-4">
                     <div>
-                      <h3 className='text-xl font-bold text-foreground mb-1 font-display'>{project.name}</h3>
-                      <p className='text-xs font-mono text-secondary mb-3 font-semibold'>{project.tagline}</p>
-                      <p className='text-sm text-muted-foreground leading-relaxed mb-4 text-justify'>{project.description}</p>
+                      <h3 className="text-xl font-bold text-foreground mb-1 font-display">{project.name}</h3>
+                      <p className="text-xs font-mono text-secondary mb-3 font-semibold">{project.tagline}</p>
+                      <p className="text-sm text-muted-foreground leading-relaxed">{project.description}</p>
                     </div>
 
                     <div>
-                      <div className='flex flex-wrap gap-1.5 mb-5'>
+                      <div className="flex flex-wrap gap-1.5 mb-5">
                         {project.tags.map((tag) => (
-                          <span key={tag} className='text-[10px] font-mono bg-primary/10 text-primary border border-primary/10 px-2 py-0.5 rounded'>
+                          <span key={tag} className="text-[10px] font-mono bg-primary/10 text-primary border border-primary/20 px-2 py-0.5 rounded">
                             {tag}
                           </span>
                         ))}
                       </div>
 
-                      <div className='flex items-center gap-4 pt-4 border-t border-primary/10'>
+                      <div className="flex items-center gap-4 pt-4 border-t border-border">
                         <a
                           href={project.link}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className='flex items-center gap-1.5 text-xs font-mono text-primary hover:text-cyan-300 font-bold transition-colors'
+                          className="flex items-center gap-1.5 text-xs font-mono text-primary hover:underline font-bold transition-colors"
                         >
-                          <Send size={12} />
+                          <ExternalLink size={14} />
                           Live Demo
                         </a>
                         {project.github && (
@@ -580,10 +560,10 @@ const Home = () => {
                             href={project.github}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className='flex items-center gap-1.5 text-xs font-mono text-muted-foreground hover:text-foreground font-bold transition-colors'
+                            className="flex items-center gap-1.5 text-xs font-mono text-muted-foreground hover:text-foreground font-bold transition-colors"
                           >
-                            <Github size={12} />
-                            Source
+                            <Github size={14} />
+                            Source Code
                           </a>
                         )}
                       </div>
@@ -597,298 +577,236 @@ const Home = () => {
       </section>
 
       {/* Certificates Section */}
-      <section id="certificates" data-reveal style={{ '--reveal-delay': '150ms' }} className="relative py-20 md:py-28 overflow-hidden">
-        <div className="container mx-auto px-4 md:px-6">
+      <section id="certificates" data-reveal style={{ '--reveal-delay': '150ms' }} className="relative py-24 overflow-hidden">
+        <div className="container mx-auto px-6 sm:px-12 lg:px-20">
           <div className="max-w-6xl mx-auto">
-            {/* Section Title */}
-            <div className="mb-12 md:mb-16 text-center animate-fade-up opacity-0">
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-primary/20 bg-primary/5 mb-4">
+            {/* Section Header */}
+            <div className="mb-14 text-center animate-fade-up opacity-0">
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-primary/20 bg-primary/10 mb-4">
                 <span className="text-xs font-mono text-primary font-bold tracking-widest uppercase">04 / Credentials</span>
               </div>
-              <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4">
+              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-4">
                 <span className="text-foreground">My</span>
-                <span className="text-gradient neon-glow ml-2">Certificates</span>
+                <span className="text-gradient ml-2">Certificates</span>
               </h2>
-              <div className="w-16 h-1 bg-linear-to-r from-primary to-secondary rounded-full mx-auto mt-4"></div>
+              <div className="w-16 h-1 bg-gradient-to-r from-primary to-secondary rounded-full mx-auto" />
             </div>
 
-            {/* Carousel Layout */}
-            <div className="animate-fade-up opacity-0 delay-300">
-              <div className="relative">
-                {/* Overlay untuk efek slot machine (kiri & kanan) */}
-                <div className="absolute inset-0 pointer-events-none z-20">
-                  <div className="absolute top-0 bottom-0 left-0 w-12 sm:w-24 bg-linear-to-r from-background to-transparent" />
-                  <div className="absolute top-0 bottom-0 right-0 w-12 sm:w-24 bg-linear-to-l from-background to-transparent" />
-                  {/* Center highlight glow */}
-                  <div className="absolute left-1/2 -translate-x-1/2 top-0 bottom-0 w-72 sm:w-80 md:w-96 bg-linear-to-r from-primary/10 via-primary/20 to-primary/10 blur-2xl" />
-                </div>
-
-                {/* Scrollable container */}
-                <div className="flex overflow-x-auto snap-x snap-mandatory py-10 px-[15%] sm:px-[30%] md:px-[35%] lg:px-[40%] scrollbar-slot-horizontal scroll-smooth gap-6 relative">
-                  {certificates.map((cert, index) => (
-                    <div
-                      key={index}
-                      className="snap-center shrink-0 w-72 sm:w-80 md:w-96 px-3 flex items-center justify-center transition-all duration-500 ease-out transform"
-                      style={{
-                        scrollSnapAlign: 'center',
-                        scrollSnapStop: 'always'
-                      }}
-                    >
-                      <div 
-                        className="cert-card w-full glass-card flex flex-col justify-between overflow-hidden border border-primary/20 transition-all duration-500 hover:border-primary/50 h-[400px]"
-                        data-cert-index={index}
-                      >
-                        <div 
-                          className="relative w-full aspect-video overflow-hidden border-b border-primary/10 bg-black/40 cursor-pointer group"
-                          onClick={() => setSelectedCert(cert.image)}
-                        >
-                          <img
-                            src={cert.image}
-                            alt={cert.name}
-                            className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-                          />
-                          <div className="absolute top-3 right-3 bg-slate-950/80 backdrop-blur-md px-3 py-1 rounded-full border border-primary/20 z-10">
-                            <span className="text-[10px] font-mono text-primary font-bold tracking-wider uppercase">Cert {index + 1}</span>
-                          </div>
-                          {/* Hover Overlay */}
-                          <div className="absolute inset-0 bg-slate-950/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
-                            <span className="text-xs font-mono text-foreground bg-slate-950/85 px-3 py-1.5 rounded-lg border border-primary/30 backdrop-blur-sm">
-                              Click to View Full Size
-                            </span>
-                          </div>
-                        </div>
-
-                        <div className="p-6 flex-1 flex flex-col justify-between">
-                          <div>
-                            <h3 className="text-base sm:text-lg font-bold text-foreground mb-2 line-clamp-2 font-display">{cert.name}</h3>
-                            <p className="text-xs sm:text-sm text-muted-foreground leading-relaxed mb-4 text-justify line-clamp-3">{cert.description}</p>
-                          </div>
-
-                          <div>
-                            <div className="flex flex-wrap gap-1 mb-4">
-                              {cert.tags.map((tag) => (
-                                <span key={tag} className="text-[9px] font-mono bg-primary/10 text-primary border border-primary/10 px-1.5 py-0.5 rounded">
-                                  {tag}
-                                </span>
-                              ))}
-                            </div>
-
-                            <div className="flex items-center gap-4 pt-3 border-t border-primary/10">
-                              <button
-                                onClick={() => setSelectedCert(cert.image)}
-                                className="flex items-center gap-1.5 text-xs font-mono text-primary hover:text-cyan-300 font-bold transition-colors cursor-pointer"
-                              >
-                                <Send size={12} />
-                                View Certificate
-                              </button>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
+            {/* Certificates Grid */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 animate-fade-up opacity-0 delay-200">
+              {certificates.map((cert, index) => (
+                <div
+                  key={index}
+                  onClick={() => setSelectedCert(cert)}
+                  className="glass-card flex flex-col justify-between overflow-hidden border border-border hover:border-primary/50 transition-all duration-300 hover:-translate-y-1.5 cursor-pointer group"
+                >
+                  <div className="relative w-full aspect-video overflow-hidden border-b border-border bg-muted">
+                    <img
+                      src={cert.image}
+                      alt={cert.name}
+                      className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                    />
+                    <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                      <span className="text-xs font-mono text-white bg-black/75 px-3 py-1.5 rounded-lg backdrop-blur-sm border border-white/20">
+                        Click to View Certificate
+                      </span>
                     </div>
-                  ))}
+                  </div>
+
+                  <div className="p-5 flex-1 flex flex-col justify-between space-y-3">
+                    <div>
+                      <h3 className="text-base font-bold text-foreground mb-2 line-clamp-2">{cert.name}</h3>
+                      <p className="text-xs text-muted-foreground leading-relaxed line-clamp-3">{cert.description}</p>
+                    </div>
+
+                    <div className="flex flex-wrap gap-1 pt-2">
+                      {cert.tags.map((tag) => (
+                        <span key={tag} className="text-[10px] font-mono bg-primary/10 text-primary border border-primary/20 px-2 py-0.5 rounded">
+                          {tag}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
                 </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Certificate Modal Viewer */}
+      {selectedCert && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 bg-black/80 backdrop-blur-md animate-fade-up">
+          <div
+            className="relative w-full max-w-4xl glass-card border border-primary/40 p-6 overflow-hidden rounded-2xl shadow-2xl max-h-[90vh] flex flex-col"
+            onClick={(e) => e.stopPropagation()}
+          >
+            {/* Modal Header */}
+            <div className="flex items-center justify-between mb-4 pb-3 border-b border-border">
+              <h3 className="text-lg sm:text-xl font-bold font-display text-foreground line-clamp-1">
+                {selectedCert.name}
+              </h3>
+              <button
+                type="button"
+                onClick={() => setSelectedCert(null)}
+                className="p-1.5 rounded-xl border border-border text-muted-foreground hover:text-foreground hover:bg-muted transition-colors cursor-pointer"
+              >
+                <X size={20} />
+              </button>
+            </div>
+
+            {/* Certificate Large Image */}
+            <div className="flex-1 overflow-y-auto space-y-4">
+              <div className="w-full max-h-[60vh] rounded-xl overflow-hidden border border-border bg-black">
+                <img src={selectedCert.image} alt={selectedCert.name} className="w-full h-full object-contain mx-auto" />
+              </div>
+              <p className="text-sm text-muted-foreground leading-relaxed">{selectedCert.description}</p>
+              <div className="flex flex-wrap gap-2 pt-2">
+                {selectedCert.tags.map((tag) => (
+                  <span key={tag} className="text-xs font-mono bg-primary/10 text-primary border border-primary/20 px-3 py-1 rounded-md">
+                    {tag}
+                  </span>
+                ))}
               </div>
             </div>
           </div>
         </div>
-        {/* Background decoration */}
-        <div className="absolute top-1/2 -left-40 w-80 h-80 bg-secondary/10 rounded-full blur-3xl -z-10" />
-      </section>
+      )}
 
-      {/* contact section */}
-      <section id="contact" data-reveal style={{ '--reveal-delay': '160ms' }} className="relative py-20 md:py-28 overflow-hidden">
-        <div className="container mx-auto px-4 md:px-6">
+      {/* Contact Section */}
+      <section id="contact" data-reveal style={{ '--reveal-delay': '160ms' }} className="relative py-24 overflow-hidden">
+        <div className="container mx-auto px-6 sm:px-12 lg:px-20">
           <div className="max-w-4xl mx-auto">
+            {/* Header */}
             <div className="text-center mb-12 animate-fade-up opacity-0">
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-primary/20 bg-primary/5 mb-4">
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-primary/20 bg-primary/10 mb-4">
                 <span className="text-xs font-mono text-primary font-bold tracking-widest uppercase">05 / Contact</span>
               </div>
-              <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4">
+              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-4">
                 <span className="text-foreground">Get In</span>
-                <span className="text-gradient neon-glow ml-2">Touch</span>
+                <span className="text-gradient ml-2">Touch</span>
               </h2>
-              <div className="w-16 h-1 bg-linear-to-r from-primary to-secondary rounded-full mx-auto mt-4"></div>
-              <p className="text-muted-foreground text-base md:text-lg mt-4">
-                Have a project in mind? Let&apos;s build something amazing together.
+              <div className="w-16 h-1 bg-gradient-to-r from-primary to-secondary rounded-full mx-auto mt-4" />
+              <p className="text-muted-foreground text-base sm:text-lg mt-4 max-w-xl mx-auto">
+                Have a project in mind or looking for a Web2 & Web3 developer? Let&apos;s build something exceptional.
               </p>
             </div>
 
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 animate-fade-up opacity-0 delay-200">
-              <div className="space-y-5">
-                <div data-reveal style={{ '--reveal-delay': '120ms' }} className="rounded-2xl border border-primary/35 bg-background/40 backdrop-blur-sm p-5 sm:p-6 hover:border-primary/60 transition-colors">
+              {/* Contact Info Cards */}
+              <div className="space-y-4">
+                <div className="glass-card p-6 border border-border">
                   <div className="flex items-center gap-4">
                     <div className="w-12 h-12 rounded-xl bg-primary/15 text-primary flex items-center justify-center">
                       <Mail size={22} />
                     </div>
                     <div>
-                      <h3 className="text-lg font-semibold text-foreground">Email</h3>
-                      <p className="text-muted-foreground">dickyramadhan0x7@gmail.com</p>
+                      <h3 className="text-sm font-mono text-muted-foreground uppercase tracking-wider">Email</h3>
+                      <p className="text-base font-bold text-foreground">dickyramadhan0x7@gmail.com</p>
                     </div>
                   </div>
                 </div>
 
-                <div data-reveal style={{ '--reveal-delay': '200ms' }} className="rounded-2xl border border-primary/35 bg-background/40 backdrop-blur-sm p-5 sm:p-6 hover:border-primary/60 transition-colors">
+                <div className="glass-card p-6 border border-border">
                   <div className="flex items-center gap-4">
                     <div className="w-12 h-12 rounded-xl bg-primary/15 text-primary flex items-center justify-center">
                       <MapPin size={22} />
                     </div>
                     <div>
-                      <h3 className="text-lg font-semibold text-foreground">Location</h3>
-                      <p className="text-muted-foreground">Remote / Worldwide</p>
+                      <h3 className="text-sm font-mono text-muted-foreground uppercase tracking-wider">Location</h3>
+                      <p className="text-base font-bold text-foreground">Indonesia / Remote Worldwide</p>
                     </div>
                   </div>
                 </div>
 
-                <div data-reveal style={{ '--reveal-delay': '260ms' }} className="rounded-2xl border border-primary/35 bg-background/40 backdrop-blur-sm p-5 sm:p-6">
-                  <p className="text-muted-foreground leading-relaxed">
-                    I&apos;m currently open for freelance projects, full-time positions, and collaborations in the Web3 space.
-                    Response time is usually within 24 hours.
+                <div className="glass-card p-6 border border-border">
+                  <p className="text-sm text-muted-foreground leading-relaxed">
+                    Available for freelance projects, full-stack web app development, smart contract auditing/integration, and full-time roles. Standard response time is within 24 hours.
                   </p>
                 </div>
               </div>
 
+              {/* Form */}
               <form
-                data-reveal
-                style={{ '--reveal-delay': '220ms' }}
                 action="https://formsubmit.co/dickyramadhan0x7@gmail.com"
                 method="POST"
                 onSubmit={handleContactSubmit}
-                className="rounded-2xl border border-primary/35 bg-background/40 backdrop-blur-sm p-5 sm:p-6 md:p-7 space-y-5"
+                className="glass-card p-6 sm:p-8 space-y-5 border border-border"
               >
-                <input type="hidden" name="_subject" value="New Message From Website" />
+                <input type="hidden" name="_subject" value="New Portfolio Contact Message" />
                 <input type="hidden" name="_template" value="table" />
-                <input
-                  type="text"
-                  name="_honey"
-                  tabIndex="-1"
-                  autoComplete="off"
-                  className="hidden"
-                  aria-hidden="true"
-                />
-                <div className="space-y-2">
-                  <label htmlFor="contact-name" className="text-sm text-foreground/90">Name</label>
+                <input type="text" name="_honey" tabIndex="-1" autoComplete="off" className="hidden" aria-hidden="true" />
+
+                {formError && (
+                  <div className="p-3 rounded-xl bg-destructive/10 border border-destructive/30 text-destructive text-xs font-mono">
+                    {formError}
+                  </div>
+                )}
+
+                {formSuccess && (
+                  <div className="p-3 rounded-xl bg-emerald-500/10 border border-emerald-500/30 text-emerald-500 text-xs font-mono flex items-center gap-2">
+                    <CheckCircle2 size={16} />
+                    Pesan berhasil disiapkan! Mengirimkan pesan Anda...
+                  </div>
+                )}
+
+                <div className="space-y-1.5">
+                  <label htmlFor="contact-name" className="text-xs font-mono text-foreground font-semibold">
+                    Name
+                  </label>
                   <input
                     id="contact-name"
                     type="text"
-                    name='name'
+                    name="name"
                     placeholder="Your name"
                     required
                     minLength={2}
                     maxLength={80}
-                    className="w-full h-11 rounded-xl border border-primary/20 bg-muted/30 px-4 text-foreground placeholder:text-muted-foreground focus:outline-none focus:border-primary/60 transition-colors"
+                    className="w-full h-11 rounded-xl border border-border bg-background/60 px-4 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:border-primary transition-colors"
                   />
                 </div>
 
-                <div className="space-y-2">
-                  <label htmlFor="contact-email" className="text-sm text-foreground/90">Email</label>
+                <div className="space-y-1.5">
+                  <label htmlFor="contact-email" className="text-xs font-mono text-foreground font-semibold">
+                    Email
+                  </label>
                   <input
                     id="contact-email"
                     type="email"
-                    name='email'
+                    name="email"
                     placeholder="you@example.com"
                     required
                     maxLength={120}
-                    className="w-full h-11 rounded-xl border border-primary/20 bg-muted/30 px-4 text-foreground placeholder:text-muted-foreground focus:outline-none focus:border-primary/60 transition-colors"
+                    className="w-full h-11 rounded-xl border border-border bg-background/60 px-4 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:border-primary transition-colors"
                   />
                 </div>
 
-                <div className="space-y-2">
-                  <label htmlFor="contact-message" className="text-sm text-foreground/90">Message</label>
+                <div className="space-y-1.5">
+                  <label htmlFor="contact-message" className="text-xs font-mono text-foreground font-semibold">
+                    Message
+                  </label>
                   <textarea
                     id="contact-message"
-                    name='message'
-                    rows={3}
-                    placeholder="Tell me about your project..."
+                    name="message"
+                    placeholder="Write your project details or message here..."
                     required
                     minLength={15}
-                    maxLength={1500}
-                    className="w-full rounded-xl border border-primary/20 bg-muted/30 px-4 py-3 text-foreground placeholder:text-muted-foreground focus:outline-none focus:border-primary/60 transition-colors resize-none"
+                    rows={4}
+                    className="w-full rounded-xl border border-border bg-background/60 p-4 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:border-primary transition-colors resize-none"
                   />
                 </div>
 
-                {formError && (
-                  <p className="text-sm text-red-300">{formError}</p>
-                )}
-
-                <Button
-                  size="lg"
-                  type="submit"
-                  disabled={isSubmitting}
-                  className="w-full cursor-pointer disabled:opacity-60 disabled:cursor-not-allowed"
-                >
-                  <span className="inline-flex items-center gap-2">
-                    <Send size={16} />
-                    {isSubmitting ? 'Sending...' : 'Send Message'}
-                  </span>
+                <Button type="submit" size="lg" disabled={isSubmitting} className="w-full gap-2">
+                  <Send size={16} />
+                  {isSubmitting ? 'Sending Message...' : 'Send Message'}
                 </Button>
               </form>
             </div>
           </div>
         </div>
-
-        <div className="absolute top-12 left-1/2 -translate-x-1/2 w-72 h-72 bg-primary/10 blur-3xl rounded-full -z-10" />
-        <div className="absolute bottom-0 right-0 w-80 h-80 bg-secondary/10 blur-3xl rounded-full -z-10" />
       </section>
+    </>
+  );
+};
 
-      {/* footer */}
-      <footer data-reveal style={{ '--reveal-delay': '80ms' }} className="border-t border-primary/20 py-8 md:py-10">
-        <div className="container mx-auto px-4 md:px-6">
-          <div className="flex flex-col md:flex-row items-center justify-between gap-6 text-center md:text-left">
-            <a href="#" className="text-2xl font-bold text-gradient neon-glow">
-              Dicky Ramadhan
-            </a>
-
-            <p className="text-sm text-muted-foreground flex items-center justify-center gap-2">
-              Copyright © 2026 Dicky Ramadhan
-              <Heart size={14} className="text-primary" />
-              Web2 &amp; Web3
-            </p>
-
-            <div className="flex items-center gap-4">
-              {[
-                { icon: Github, href: 'https://github.com/7Demon' },
-                { icon: Twitter, href: 'https://x.com/oppp354' },
-                { icon: Linkedin, href: 'https://www.linkedin.com/in/dicky-ramadhan-b2b591361/' },
-              ].map(({ icon, href }, index) => (
-                <a
-                  key={index}
-                  href={href}
-                  className="text-muted-foreground hover:text-primary transition-colors"
-                  aria-label={`footer-social-${index}`}
-                >
-                  {createElement(icon, { size: 18 })}
-                </a>
-              ))}
-            </div>
-          </div>
-        </div>
-      </footer>
-
-      {/* Lightbox Modal */}
-      {selectedCert && (
-        <div 
-          className="fixed inset-0 z-50 flex items-center justify-center bg-black/85 backdrop-blur-md p-4 transition-all duration-300"
-          onClick={() => setSelectedCert(null)}
-        >
-          <div 
-            className="relative max-w-4xl max-h-[90vh] w-full flex flex-col items-center justify-center"
-            onClick={(e) => e.stopPropagation()}
-          >
-            <button 
-              onClick={() => setSelectedCert(null)}
-              className="absolute -top-12 right-0 text-muted-foreground hover:text-foreground text-sm font-mono flex items-center gap-1 border border-primary/20 bg-slate-950/80 px-3 py-1 rounded-lg hover:border-primary/50 transition-all cursor-pointer"
-            >
-              Close [Esc]
-            </button>
-            <img 
-              src={selectedCert} 
-              alt="Certificate Details" 
-              className="max-w-full max-h-[80vh] object-contain rounded-lg border border-primary/30 shadow-[0_0_50px_rgba(6,182,212,0.15)] animate-scale-in"
-            />
-          </div>
-        </div>
-      )}
-    </>)
-}
 export default Home;
